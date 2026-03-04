@@ -58,8 +58,7 @@ h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-we
 .list-row{border-bottom:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden}
 .list-row:first-child{border-top:1px solid var(--border)}
 .list-row-header{display:grid;grid-template-columns:1fr 100px 28px;align-items:center;gap:2rem;padding:1.6rem 0;position:relative;z-index:1}
-.list-row::after{content:'';position:absolute;left:-3.5rem;right:-3.5rem;top:0;height:100%;background:var(--faint);opacity:0;pointer-events:none;transition:opacity .18s}
-.list-row:hover::after{opacity:1}
+
 .row-title{font-family:var(--u);font-size:clamp(.78rem,1.8vw,1.05rem);font-weight:300;letter-spacing:-.01em;position:relative;z-index:1}
 .row-meta{font-family:var(--i);font-size:.7rem;color:var(--muted);position:relative;z-index:1}
 .row-toggle{font-size:.85rem;color:var(--muted);position:relative;z-index:1;transition:transform .3s,color .2s;line-height:1;user-select:none}
@@ -76,8 +75,8 @@ h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-we
 /* TECH STACK */
 .stack-wrap{padding:3rem 0;border-top:1px solid var(--border);overflow:hidden}
 .stack-label{font-family:var(--i);font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem}
-.marquee-inner{display:flex;gap:3.5rem;align-items:center;width:max-content;animation:marquee 22s linear infinite}
-.marquee-inner img{width:32px;height:32px;object-fit:contain;filter:grayscale(1) opacity(.25);transition:filter .25s,transform .25s;flex-shrink:0}
+.marquee-inner{display:flex;gap:4rem;align-items:center;width:max-content;animation:marquee 26s linear infinite}
+.marquee-inner img{width:46px;height:46px;object-fit:contain;filter:grayscale(1) opacity(.35);transition:filter .25s,transform .25s;flex-shrink:0}
 .marquee-inner img:hover{filter:grayscale(0) opacity(1);transform:scale(1.15)}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -142,7 +141,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
 
 <!-- NAV (populated by JS) -->
 <nav>
-  <a href="#home" class="nav-logo" id="navLogo">RT</a>
+  <a href="#home" class="nav-logo" id="navLogo"></a>
   <div class="nav-links">
     <a href="#home">Home</a>
     <a href="#aboutme">About</a>
@@ -242,7 +241,7 @@ function render(d) {
   document.getElementById('heroEyebrow').textContent = `Portfolio — ${d.hero.year}`;
   const nameParts = d.hero.name.split(' ');
   document.getElementById('heroName').innerHTML = nameParts.join('<br>');
-  document.getElementById('navLogo').textContent = nameParts.map(n=>n[0]).join('');
+  // nav logo intentionally left empty
   document.getElementById('heroPills').innerHTML = d.hero.pills.map(p=>`<span class="hero-pill">${p}</span>`).join('');
   document.getElementById('footerBrand').textContent = d.hero.name;
   document.getElementById('footerCopy').textContent = `© ${d.hero.year} ${d.hero.name}`;
