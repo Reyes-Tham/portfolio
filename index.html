@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reyes Tham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--text:#0a0a0a;--muted:#999;--faint:#f5f5f5;--border:#e8e8e8;
+  --u:'Unbounded',sans-serif;--i:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--i);font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--text);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s ease}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(10,10,10,.2);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3.5rem;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--u);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{font-family:var(--i);font-size:.72rem;font-weight:400;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+
+/* HERO */
+#home{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:9rem 3.5rem 3.5rem;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-family:var(--i);font-size:.7rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
+.hero-name{font-family:var(--u);font-size:clamp(3rem,9.5vw,10rem);font-weight:300;line-height:.95;letter-spacing:-.03em;color:var(--text)}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1.5rem;margin-top:3rem}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem}
+.hero-pill{font-family:var(--i);font-size:.7rem;font-weight:400;color:var(--muted);border:1px solid var(--border);border-radius:2rem;padding:.4rem .9rem}
+.hero-scroll{display:flex;align-items:center;gap:.8rem;font-family:var(--i);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero-scroll-line{width:28px;height:1px;background:var(--muted);animation:lineAnim 2s ease infinite}
+@keyframes lineAnim{0%,100%{width:18px;opacity:.4}50%{width:36px;opacity:1}}
+
+/* SECTION */
+section{padding:7rem 3.5rem;border-top:1px solid var(--border)}
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4.5rem;gap:2rem;flex-wrap:wrap}
+.section-num{font-family:var(--i);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:.3rem}
+h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-weight:300;letter-spacing:-.025em;line-height:1.1;text-align:right}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:6rem;align-items:start}
+.about-meta{display:flex;flex-direction:column}
+.about-meta-item{padding:1.1rem 0;border-bottom:1px solid var(--border)}
+.about-meta-item:first-child{border-top:1px solid var(--border)}
+.about-meta-item label{display:block;font-family:var(--i);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.about-meta-item span{font-family:var(--i);font-size:.82rem;line-height:1.5}
+.about-body{font-family:var(--i);font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.9;color:#444;font-weight:300}
+
+/* LIST ROWS */
+.list-table{display:flex;flex-direction:column}
+.list-row{border-bottom:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden}
+.list-row:first-child{border-top:1px solid var(--border)}
+.list-row-header{display:grid;grid-template-columns:1fr 100px 28px;align-items:center;gap:2rem;padding:1.6rem 0;position:relative;z-index:1}
+.list-row::after{content:'';position:absolute;left:-3.5rem;right:-3.5rem;top:0;height:100%;background:var(--faint);opacity:0;pointer-events:none;transition:opacity .18s}
+.list-row:hover::after{opacity:1}
+.row-title{font-family:var(--u);font-size:clamp(.78rem,1.8vw,1.05rem);font-weight:300;letter-spacing:-.01em;position:relative;z-index:1}
+.row-meta{font-family:var(--i);font-size:.7rem;color:var(--muted);position:relative;z-index:1}
+.row-toggle{font-size:.85rem;color:var(--muted);position:relative;z-index:1;transition:transform .3s,color .2s;line-height:1;user-select:none}
+.list-row:hover .row-toggle{color:var(--text)}
+.list-row.open .row-toggle{transform:rotate(45deg);color:var(--text)}
+
+/* EXPAND PANEL */
+.list-expand{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.4,0,0.2,1)}
+.list-expand-inner{padding:0 0 1.8rem;display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap}
+.expand-desc{font-family:var(--i);font-size:.85rem;line-height:1.8;color:#555;font-weight:300;flex:1;min-width:240px}
+.expand-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--i);font-size:.72rem;font-weight:500;color:var(--text);text-decoration:none;border:1px solid var(--border);border-radius:2rem;padding:.45rem 1rem;transition:background .2s,border-color .2s;white-space:nowrap;align-self:flex-start;margin-top:.25rem}
+.expand-link:hover{background:var(--text);color:#fff;border-color:var(--text)}
+
+/* TECH STACK */
+.stack-wrap{padding:3rem 0;border-top:1px solid var(--border);overflow:hidden}
+.stack-label{font-family:var(--i);font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem}
+.marquee-inner{display:flex;gap:3.5rem;align-items:center;width:max-content;animation:marquee 22s linear infinite}
+.marquee-inner img{width:32px;height:32px;object-fit:contain;filter:grayscale(1) opacity(.25);transition:filter .25s,transform .25s;flex-shrink:0}
+.marquee-inner img:hover{filter:grayscale(0) opacity(1);transform:scale(1.15)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* CLUBS */
+.clubs-stack{display:flex;flex-direction:column}
+.club-block{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0;border-bottom:1px solid var(--border)}
+.club-block:first-child{border-top:1px solid var(--border)}
+.carousel{overflow:hidden;border-radius:3px;aspect-ratio:3/2;background:var(--faint)}
+.carousel-slides{display:flex;transition:transform .55s cubic-bezier(0.4,0,0.2,1)}
+.carousel-slides img{width:100%;flex-shrink:0;height:100%;object-fit:cover}
+.carousel-dots{display:flex;gap:.4rem;margin-top:.8rem}
+.carousel-dot{width:16px;height:2px;background:var(--border);border:none;cursor:pointer;border-radius:2px;transition:background .2s,width .25s}
+.carousel-dot.active{background:var(--text);width:28px}
+.club-name{font-family:var(--u);font-size:clamp(1.1rem,2.5vw,1.9rem);font-weight:300;letter-spacing:-.02em;margin-bottom:1.8rem;line-height:1.2}
+.club-roles{display:flex;flex-direction:column;margin-bottom:2rem}
+.club-role{display:flex;align-items:baseline;gap:1.2rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.club-role:first-child{border-top:1px solid var(--border)}
+.club-role-title{font-family:var(--i);font-size:.78rem;font-weight:500}
+.club-role-period{font-family:var(--i);font-size:.7rem;color:var(--muted)}
+.club-desc{font-family:var(--i);font-size:.82rem;line-height:1.85;color:#555;font-weight:300}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+.footer-brand{font-family:var(--u);font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-family:var(--i);font-size:.7rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-family:var(--i);font-size:.65rem;color:#bbb}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* LOADING */
+.loading-screen{position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:9000;transition:opacity .4s ease}
+.loading-screen.hidden{opacity:0;pointer-events:none}
+.loading-dot{width:6px;height:6px;background:var(--text);border-radius:50%;animation:ldot .8s ease infinite alternate}
+@keyframes ldot{from{opacity:.2;transform:scale(.8)}to{opacity:1;transform:scale(1.2)}}
+
+@media(max-width:860px){
+  nav{padding:1.1rem 1.5rem}
+  .nav-links{display:none}
+  #home,section{padding-left:1.5rem;padding-right:1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .club-block{grid-template-columns:1fr;gap:2rem}
+  .list-row-header{grid-template-columns:1fr 28px}
+  .row-meta{display:none}
+  footer{flex-direction:column;align-items:flex-start}
+  h2.section-title{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-dot"></div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV (populated by JS) -->
+<nav>
+  <a href="#home" class="nav-logo" id="navLogo">RT</a>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#aboutme">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#clubs">Clubs</a>
+    <a href="#achievements">Achievements</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="border:none">
+  <div>
+    <p class="hero-eyebrow reveal" id="heroEyebrow"></p>
+    <h1 class="hero-name reveal d1" id="heroName"></h1>
+  </div>
+  <div class="hero-bottom reveal d2">
+    <div class="hero-pills" id="heroPills"></div>
+    <div class="hero-scroll"><div class="hero-scroll-line"></div>Scroll</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="aboutme">
+  <div class="section-header reveal">
+    <span class="section-num">01 — About Me</span>
+    <h2 class="section-title">A little<br>about me.</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-meta reveal d1" id="aboutMeta"></div>
+    <p class="about-body reveal d2" id="aboutBio"></p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02 — Projects</span>
+    <h2 class="section-title">Selected<br>work.</h2>
+  </div>
+  <div class="list-table" id="projectsList"></div>
+</section>
+
+<!-- TECH STACK -->
+<div class="stack-wrap">
+  <p class="stack-label">Tech Stack</p>
+  <div style="overflow:hidden"><div class="marquee-inner" id="marqueeInner"></div></div>
+</div>
+
+<!-- CLUBS -->
+<section id="clubs">
+  <div class="section-header reveal">
+    <span class="section-num">03 — Clubs &amp; Societies</span>
+    <h2 class="section-title">Leadership &amp;<br>community.</h2>
+  </div>
+  <div class="clubs-stack" id="clubsStack"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-header reveal">
+    <span class="section-num">04 — Achievements</span>
+    <h2 class="section-title">Recognition.</h2>
+  </div>
+  <div class="list-table" id="achievementsList"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand" id="footerBrand"></span>
+  <div class="footer-links">
+    <a href="#home">Top</a><a href="#projects">Projects</a><a href="#achievements">Awards</a>
+  </div>
+  <span class="footer-copy" id="footerCopy"></span>
+</footer>
+
+<script>
+/* ── LOAD DATA ── */
+async function loadData() {
+  try {
+    const res = await fetch('data.json?v=' + Date.now());
+    return await res.json();
+  } catch(e) {
+    console.error('Could not load data.json', e);
+    return null;
+  }
+}
+
+/* ── RENDER ── */
+function render(d) {
+  // Hero
+  document.getElementById('heroEyebrow').textContent = `Portfolio — ${d.hero.year}`;
+  const nameParts = d.hero.name.split(' ');
+  document.getElementById('heroName').innerHTML = nameParts.join('<br>');
+  document.getElementById('navLogo').textContent = nameParts.map(n=>n[0]).join('');
+  document.getElementById('heroPills').innerHTML = d.hero.pills.map(p=>`<span class="hero-pill">${p}</span>`).join('');
+  document.getElementById('footerBrand').textContent = d.hero.name;
+  document.getElementById('footerCopy').textContent = `© ${d.hero.year} ${d.hero.name}`;
+
+  // About
+  document.getElementById('aboutMeta').innerHTML = `
+    <div class="about-meta-item"><label>Status</label><span>${d.about.status}</span></div>
+    <div class="about-meta-item"><label>Education</label><span>${d.about.education}</span></div>
+    <div class="about-meta-item"><label>Award</label><span>${d.about.award}</span></div>
+    <div class="about-meta-item"><label>Interests</label><span>${d.about.interests}</span></div>`;
+  document.getElementById('aboutBio').textContent = d.about.bio;
+
+  // Projects
+  const pl = document.getElementById('projectsList');
+  pl.innerHTML = '';
+  d.projects.forEach((p, i) => {
+    const delays = ['','d1','d2','d3'];
+    const row = document.createElement('div');
+    row.className = 'list-row reveal ' + delays[i % 4];
+    row.innerHTML = `
+      <div class="list-row-header">
+        <span class="row-title">${p.title}</span>
+        <span class="row-meta">${p.year}</span>
+        <span class="row-toggle">+</span>
+      </div>
+      <div class="list-expand">
+        <div class="list-expand-inner">
+          <p class="expand-desc">${p.description}</p>
+          ${p.link ? `<a class="expand-link" href="${p.link}" target="_blank" rel="noopener">View Project ↗</a>` : ''}
+        </div>
+      </div>`;
+    row.querySelector('.list-row-header').addEventListener('click', () => toggleRow(row));
+    pl.appendChild(row);
+  });
+
+  // Tech Stack
+  const mi = document.getElementById('marqueeInner');
+  const imgs = [...d.techStack, ...d.techStack]; // duplicate for loop
+  mi.innerHTML = imgs.map(t => `<img src="${t.image}" alt="${t.name}" />`).join('');
+
+  // Clubs
+  const cs = document.getElementById('clubsStack');
+  cs.innerHTML = '';
+  d.clubs.forEach((c, ci) => {
+    const block = document.createElement('div');
+    block.className = 'club-block';
+    const rolesHtml = c.roles.map((r,ri) =>
+      `<div class="club-role${ri===0?' first-role':''}"><span class="club-role-title">${r.title}</span><span class="club-role-period">${r.period}</span></div>`
+    ).join('');
+    const dotsHtml = c.images.map((_, idx) =>
+      `<button class="carousel-dot${idx===0?' active':''}" data-club="${ci}" data-index="${idx}"></button>`
+    ).join('');
+    const slidesHtml = c.images.map(img =>
+      `<img src="${img}" alt="${c.name}" loading="lazy" />`
+    ).join('');
+    block.innerHTML = `
+      <div class="reveal">
+        <div class="carousel" data-club="${ci}">
+          <div class="carousel-slides">${slidesHtml}</div>
+        </div>
+        <div class="carousel-dots">${dotsHtml}</div>
+      </div>
+      <div class="reveal d1">
+        <h3 class="club-name">${c.name}</h3>
+        <div class="club-roles">${rolesHtml}</div>
+        <p class="club-desc">${c.description}</p>
+      </div>`;
+    cs.appendChild(block);
+  });
+
+  // Achievements
+  const al = document.getElementById('achievementsList');
+  al.innerHTML = '';
+  d.achievements.forEach((a, i) => {
+    const delays = ['','d1','d2','d3'];
+    const row = document.createElement('div');
+    row.className = 'list-row reveal ' + delays[i % 4];
+    row.innerHTML = `
+      <div class="list-row-header">
+        <span class="row-title">${a.title}</span>
+        <span class="row-meta">${a.date}</span>
+        <span class="row-toggle">+</span>
+      </div>
+      <div class="list-expand">
+        <div class="list-expand-inner">
+          <p class="expand-desc">${a.description}</p>
+          ${a.link ? `<a class="expand-link" href="${a.link}" target="_blank" rel="noopener">View ↗</a>` : ''}
+        </div>
+      </div>`;
+    row.querySelector('.list-row-header').addEventListener('click', () => toggleRow(row));
+    al.appendChild(row);
+  });
+}
+
+/* ── EXPAND ROWS ── */
+function toggleRow(row) {
+  const panel = row.querySelector('.list-expand');
+  const inner = row.querySelector('.list-expand-inner');
+  const isOpen = row.classList.contains('open');
+  // close all others in same list
+  row.closest('.list-table').querySelectorAll('.list-row.open').forEach(r => {
+    if (r !== row) {
+      r.classList.remove('open');
+      r.querySelector('.list-expand').style.maxHeight = '0';
+    }
+  });
+  if (isOpen) {
+    row.classList.remove('open');
+    panel.style.maxHeight = '0';
+  } else {
+    row.classList.add('open');
+    panel.style.maxHeight = inner.scrollHeight + 32 + 'px';
+  }
+}
+
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a,button,.list-row')) {
+    cur.style.transform='translate(-50%,-50%) scale(3)'; ring.style.opacity='.3';
+  } else {
+    cur.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='1';
+  }
+});
+
+/* ── SCROLL REVEAL ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+function observeAll() {
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+/* ── CAROUSELS ── */
+const carouselState = {};
+function goTo(club, idx) {
+  const c = document.querySelector(`.carousel[data-club="${club}"]`);
+  if (!c) return;
+  c.querySelector('.carousel-slides').style.transform = `translateX(-${idx * 100}%)`;
+  document.querySelectorAll(`.carousel-dot[data-club="${club}"]`).forEach((d,i) => d.classList.toggle('active', i===idx));
+  carouselState[club] = idx;
+}
+function bindCarousels() {
+  document.querySelectorAll('.carousel-dot').forEach(d => {
+    d.addEventListener('click', () => goTo(d.dataset.club, +d.dataset.index));
+  });
+  setInterval(() => {
+    document.querySelectorAll('.carousel').forEach(c => {
+      const club = c.dataset.club;
+      const total = c.querySelectorAll('img').length;
+      goTo(club, ((carouselState[club]||0)+1) % total);
+    });
+  }, 4000);
+}
+
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded', async () => {
+  const data = await loadData();
+  if (data) {
+    render(data);
+    observeAll();
+    bindCarousels();
+    // Hero immediate reveal
+    document.querySelectorAll('#home .reveal').forEach((el,i) => {
+      setTimeout(() => el.classList.add('visible'), i*130+80);
+    });
+  }
+  document.getElementById('loadingScreen').classList.add('hidden');
+});
+</script>
+</body>
+</html>
