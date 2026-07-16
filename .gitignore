@@ -1,0 +1,10 @@
+# Local secrets — never commit these
+.env
+.env.*
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+
+# Tooling, if ever added
+node_modules/

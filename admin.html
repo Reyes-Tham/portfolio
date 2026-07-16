@@ -263,10 +263,26 @@ input[type=file]{display:none}
 </div>
 
 <script>
-/* ─── PASSWORD ─── */
-const PASS = 'reyes2025'; // change this
-function unlock() {
-  if (document.getElementById('pwInput').value === PASS) {
+/* ─── PASSWORD ───
+   Only a SHA-256 hash is stored here — the password itself never appears
+   in this file or anywhere in the repo, so it can't be read from the source.
+   To change the password: open this page, open DevTools (F12) → Console,
+   run  await newPassHash('yourNewPassword')  and paste the printed hash
+   over PASS_HASH below. */
+const PASS_HASH = '91706e38fa2dbe269bceae32c1cc08b7b3684216cc97415c4de14da456eda7cf';
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function newPassHash(pw) {
+  const h = await sha256(pw);
+  console.log('Your new PASS_HASH:\n' + h);
+  return h;
+}
+async function unlock() {
+  if (!crypto.subtle) { alert('This page must be opened over https:// or from a local file for the login to work.'); return; }
+  const hash = await sha256(document.getElementById('pwInput').value);
+  if (hash === PASS_HASH) {
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('adminWrap').style.display = 'flex';
     initAdmin();
