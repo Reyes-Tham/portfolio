@@ -2,14 +2,11 @@
   "hero": {
     "name": "Reyes Tham",
     "year": "2026",
-    "eyebrow": "Reyes Tham — Portfolio 2026",
-    "headline": "I build AI agents & automation that make slow work fast.",
-    "subline": "Computer Engineering graduate, NUS Computer Science from 2026. Currently NSF at HQ RSAF — shipping tools that save people hours every week.",
     "pills": [
-      "AI Agents & LLM Tooling",
-      "Workflow Automation",
-      "Full-Stack & Mobile",
-      "ML & Data Systems"
+      "Computer Engineering Graduate",
+      "NUS Computer Science 2026",
+      "NSF @ HQ RSAF",
+      "ST Engineering Prize"
     ]
   },
   "about": {
