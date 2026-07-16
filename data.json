@@ -1,12 +1,15 @@
 {
   "hero": {
     "name": "Reyes Tham",
-    "year": "2025",
+    "year": "2026",
+    "eyebrow": "Reyes Tham — Portfolio 2026",
+    "headline": "I build AI agents & automation that make slow work fast.",
+    "subline": "Computer Engineering graduate, NUS Computer Science from 2026. Currently NSF at HQ RSAF — shipping tools that save people hours every week.",
     "pills": [
-      "Computer Engineering Graduate",
-      "NUS Computer Science 2026",
-      "NSF @ HQ RSAF",
-      "ST Engineering Prize"
+      "AI Agents & LLM Tooling",
+      "Workflow Automation",
+      "Full-Stack & Mobile",
+      "ML & Data Systems"
     ]
   },
   "about": {
@@ -22,14 +25,42 @@
     ],
     "bio": "I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."
   },
-  "projects": [
+  "caseStudies": [
     {
-      "id": "p1",
+      "id": "cs1",
       "title": "Telegram AI Chat Bot",
       "year": "2026",
-      "description": "Built a Python-based Telegram AI assistant with a modular multi-agent architecture, enabling agents to communicate with one another and form a small autonomous AI ecosystem. Features include scheduled prompting for automated daily briefings, real-time stock tracking with the latest market news, and task automation workflows for retrieving stock insights and job listings. Powered by the Anthropic API and deployed on Render, with market data sourced from Finnhub and Yahoo Finance.",
-      "link": "https://github.com/Reyes-Tham/ReyesV2"
+      "tag": "AI · Agents · Automation",
+      "summary": "A Python-based Telegram AI assistant with a modular multi-agent architecture — agents communicate with one another and form a small autonomous AI ecosystem. Scheduled prompting delivers automated daily briefings, real-time stock tracking surfaces the latest market news, and task automation workflows retrieve stock insights and job listings without being asked.",
+      "outcome": "A personal AI ecosystem that runs briefings, market tracking and job hunts on autopilot.",
+      "stack": ["Python", "Anthropic API", "Finnhub", "Yahoo Finance", "Render"],
+      "link": "https://github.com/Reyes-Tham/ReyesV2",
+      "media": []
     },
+    {
+      "id": "cs2",
+      "title": "Data Sorting Application",
+      "year": "2024",
+      "tag": "Desktop · Data Tooling",
+      "summary": "A data sorting application built for mVizn Pte Ltd with built-in image editing tools, using Java and MySQL. Designed and implemented the core features for organizing large datasets efficiently while letting users edit and manage images directly on the Windows platform.",
+      "outcome": "Improved the company's data sorting efficiency by 40%.",
+      "stack": ["Java", "MySQL", "Windows"],
+      "link": "https://github.com/Reyes-Tham/Mvizn_datasort",
+      "media": []
+    },
+    {
+      "id": "cs3",
+      "title": "Library Inventory System",
+      "year": "2023",
+      "tag": "Full-Stack · Desktop",
+      "summary": "A Java desktop application using JavaFX and MySQL to manage library inventory, borrowing records and user accounts. Implemented OOP design patterns, fine calculation logic, search and filtering, admin dashboards and statistical reporting, with the JavaMail API triggering automated overdue notifications.",
+      "outcome": "Automated overdue notifications improved return compliance and operational efficiency.",
+      "stack": ["Java", "JavaFX", "MySQL", "JavaMail"],
+      "link": "https://github.com/Reyes-Tham/LibrarianApp",
+      "media": []
+    }
+  ],
+  "archive": [
     {
       "id": "p2",
       "title": "Automated Projected Appointment",
@@ -45,25 +76,11 @@
       "link": ""
     },
     {
-      "id": "p4",
-      "title": "Data Sorting Application",
-      "year": "2024",
-      "description": "Developed a data sorting application for mVizn Pte Ltd. with built-in image editing tools using Java and MySQL. Designed and implemented core features for organizing data efficiently while allowing users to edit and manage images on windows platform. Improving company's data sorting efficiency by 40%. ",
-      "link": "https://github.com/Reyes-Tham/Mvizn_datasort"
-    },
-    {
       "id": "p5",
       "title": "Fruit Image Classifier",
       "year": "2023",
       "description": "Developed a machine learning image classification system using Python and TensorFlow to distinguish between bananas and oranges. Implemented a Convolutional Neural Network (CNN) with image preprocessing, model training, and evaluation to improve accuracy. Built an Android mobile application to integrate the trained model, allowing users to upload or capture images for real-time fruit classification.",
       "link": "https://drive.google.com/drive/folders/1weofo0C78aML2x4Wn_Pfd6SRw7QQRwRo?usp=drive_link"
-    },
-    {
-      "id": "p6",
-      "title": "Library Inventory System",
-      "year": "2023",
-      "description": "Developed a Java desktop application using JavaFX and MySQL to manage library inventory, borrowing records, and user accounts. Implemented OOP design patterns, fine calculation logic, search and filtering features, admin dashboards, and statistical reporting. Integrated the JavaMail API to trigger automated overdue notifications, improving return compliance and operational efficiency.",
-      "link": "https://github.com/Reyes-Tham/LibrarianApp"
     },
     {
       "id": "p7",
@@ -87,46 +104,42 @@
       "link": "https://drive.google.com/drive/folders/1cqmbqLGfuBRIgfdemL4J1dihSl9KwKu5?usp=drive_link"
     }
   ],
-  "techStack": [
+  "capabilities": [
     {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/yI1YZeklbQLqDXIQcSpDujw6LQ.png?width=500"
+      "group": "AI & Machine Learning",
+      "items": [
+        "LLM agents & multi-agent systems (Anthropic API)",
+        "TensorFlow & convolutional neural networks",
+        "Prompt & workflow design",
+        "Model training, evaluation & mobile integration"
+      ]
     },
     {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/5wIXfNf0nWJfmJRJ2VWGMdFqV8.webp?width=256"
+      "group": "Automation & Systems",
+      "items": [
+        "Excel / VBA process automation",
+        "Scheduled tasks & data pipelines",
+        "IoT & embedded systems (PIC18, Bluetooth)",
+        "Cloud deployment (Render, GitHub Pages)"
+      ]
     },
     {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/HODfGABGNXj8Ca1nKow1wvD6ck.png?width=1280"
+      "group": "Full-Stack & Mobile",
+      "items": [
+        "Java · JavaFX desktop applications",
+        "Android apps (Java, Firebase)",
+        "HTML / CSS / JavaScript · PHP",
+        "REST APIs & real-time chat"
+      ]
     },
     {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/9P3Br5ZmhomsFgEK6Lb4igyFbuw.png?width=960"
-    },
-    {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/9njUwDm7fwBXAsOJ7D4aerSfk.png?width=960"
-    },
-    {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/UdhL0urstLI2W3Jn6tmh9xqOBA.png?width=2400"
-    },
-    {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/3wIJv2SqSuvNhnk9dNjwHylMHk.png?width=500"
-    },
-    {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/3YI5ZMJHWykL7CJilFWl7N7Y.svg?width=2500"
-    },
-    {
-      "name": "Tech",
-      "image": "https://framerusercontent.com/images/1Ha02vDmzNorrQ0yI6Q0Kw94AcM.svg?width=800"
-    },
-    {
-      "name": "android-logo-png-transparent",
-      "image": "https://framerusercontent.com/images/android-logo.png"
+      "group": "Data & Storage",
+      "items": [
+        "MySQL · Firebase · AstraDB (NoSQL)",
+        "Data sorting & reporting tools",
+        "Financial & market data APIs",
+        "Git & GitHub version control"
+      ]
     }
   ],
   "clubs": [
@@ -248,5 +261,12 @@
       "description": "Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct",
       "link": ""
     }
-  ]
+  ],
+  "contact": {
+    "heading": "Let's build something.",
+    "blurb": "I'm open to software engineering internships, collaborations, and good conversations about AI, automation and finance. The fastest way to reach me is email or LinkedIn.",
+    "email": "rtmf1211@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/reyes-tham",
+    "github": "https://github.com/Reyes-Tham"
+  }
 }

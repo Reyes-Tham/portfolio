@@ -25,92 +25,88 @@ body{background:var(--bg);color:var(--text);font-family:var(--i);font-size:.875r
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:1.5rem 0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
 .sidebar-logo{padding:0 1.2rem 1.5rem;font-weight:600;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:1rem}
 .sidebar-logo span{color:var(--muted);font-weight:400}
-.nav-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 1.2rem;cursor:pointer;border-radius:0;color:var(--muted);font-size:.8rem;font-weight:400;transition:all .15s;border-left:2px solid transparent}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 1.2rem;cursor:pointer;color:var(--muted);font-size:.8rem;font-weight:400;transition:all .15s;border-left:2px solid transparent}
 .nav-item:hover{color:var(--text);background:var(--bg)}
 .nav-item.active{color:var(--text);font-weight:500;border-left-color:var(--text);background:var(--bg)}
-.nav-item svg{width:14px;height:14px;flex-shrink:0}
 .sidebar-bottom{margin-top:auto;padding:1rem 1.2rem;border-top:1px solid var(--border)}
 .save-btn{width:100%;background:var(--text);color:#fff;border:none;border-radius:6px;padding:.65rem 1rem;font-size:.8rem;font-family:var(--i);font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .15s}
 .save-btn:hover{background:#333}
 .save-btn.saved{background:var(--green)}
 
 .main{flex:1;overflow-y:auto}
-.page{display:none;padding:2.5rem 2.5rem 4rem}
+.page{display:none;padding:2.5rem 2.5rem 4rem;max-width:980px}
 .page.active{display:block}
 
 /* HEADER */
 .page-header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
 .page-title{font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
 .page-sub{font-size:.78rem;color:var(--muted)}
+.filo-note{display:inline-block;margin-top:.6rem;font-size:.68rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:2rem;padding:.25rem .7rem}
 
 /* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.2rem}
-.card-head{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
-.card-head-left{display:flex;align-items:center;gap:.7rem;font-weight:500;font-size:.82rem}
-.card-head-num{width:22px;height:22px;background:var(--bg);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--muted)}
+.card-head{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:.8rem}
+.card-head-left{display:flex;align-items:center;gap:.7rem;font-weight:500;font-size:.82rem;min-width:0}
+.card-head-left .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-head-num{width:22px;height:22px;background:var(--bg);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--muted);flex-shrink:0}
+.card-head-actions{display:flex;align-items:center;gap:.3rem;flex-shrink:0}
 .card-body{padding:1.2rem;display:none}
 .card.expanded .card-body{display:block}
 .card-chevron{color:var(--muted);font-size:.7rem;transition:transform .2s}
 .card.expanded .card-chevron{transform:rotate(180deg)}
+.move-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:.2rem .45rem;cursor:pointer;font-size:.7rem;color:var(--muted)}
+.move-btn:hover{border-color:var(--text);color:var(--text)}
 
 /* FORM ELEMENTS */
 .field{margin-bottom:1rem}
 .field:last-child{margin-bottom:0}
 .field label{display:block;font-size:.73rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
-input[type=text],input[type=url],input[type=password],textarea,select{width:100%;border:1px solid var(--border);border-radius:6px;padding:.6rem .8rem;font-size:.82rem;font-family:var(--i);background:#fff;color:var(--text);outline:none;transition:border-color .15s}
-input[type=text]:focus,input[type=url]:focus,textarea:focus{border-color:var(--text)}
+.field label small{font-weight:300;text-transform:none;letter-spacing:0;color:#aaa}
+input[type=text],input[type=url],input[type=email],input[type=password],textarea,select{width:100%;border:1px solid var(--border);border-radius:6px;padding:.6rem .8rem;font-size:.82rem;font-family:var(--i);background:#fff;color:var(--text);outline:none;transition:border-color .15s}
+input:focus,textarea:focus{border-color:var(--text)}
 textarea{resize:vertical;min-height:90px;line-height:1.6}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 .field-row-3{display:grid;grid-template-columns:2fr 1fr;gap:.8rem}
 
-/* PILLS EDITOR */
+/* LIST / PILL EDITORS */
 .pills-list{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.7rem}
 .pill-item{display:flex;gap:.5rem;align-items:center}
 .pill-item input{flex:1}
-.icon-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:.35rem .5rem;cursor:pointer;font-size:.75rem;color:var(--muted);transition:all .15s;flex-shrink:0}
+.icon-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:.35rem .5rem;cursor:pointer;font-size:.75rem;color:var(--muted);transition:all .15s;flex-shrink:0;font-family:var(--i)}
 .icon-btn:hover{border-color:var(--red);color:var(--red)}
 .icon-btn.add{border-color:var(--border);color:var(--text)}
-.icon-btn.add:hover{border-color:var(--text);background:var(--bg)}
-.add-row{display:flex;justify-content:flex-start}
-
-/* ROLES EDITOR */
+.icon-btn.add:hover{border-color:var(--text);background:var(--bg);color:var(--text)}
+.add-row{display:flex;justify-content:flex-start;gap:.5rem}
 .roles-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.7rem}
 .role-item{display:grid;grid-template-columns:1fr 1fr auto;gap:.5rem;align-items:center}
 
-/* IMAGE UPLOAD */
-.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin-bottom:.8rem}
-.img-thumb{position:relative;aspect-ratio:3/2;border-radius:5px;overflow:hidden;background:var(--bg);border:1px solid var(--border)}
-.img-thumb img{width:100%;height:100%;object-fit:cover}
-.img-thumb-remove{position:absolute;top:.3rem;right:.3rem;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:3px;padding:.2rem .35rem;font-size:.65rem;cursor:pointer;opacity:0;transition:opacity .15s}
-.img-thumb:hover .img-thumb-remove{opacity:1}
-.img-add{border:1.5px dashed var(--border);border-radius:5px;aspect-ratio:3/2;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:.4rem;color:var(--muted);font-size:.72rem;transition:border-color .15s;background:#fff}
-.img-add:hover{border-color:var(--text);color:var(--text)}
-.img-add svg{width:18px;height:18px}
+/* TAG EDITOR (interests, stacks, capability items) */
+.tag-box{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;border:1px solid var(--border);border-radius:6px;padding:.5rem .7rem;min-height:42px;cursor:text;background:#fff}
+.tag-chip{display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--border);border-radius:2rem;padding:.22rem .65rem;font-size:.75rem}
+.tag-chip button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.7rem;line-height:1;padding:0}
+.tag-input{border:none!important;outline:none;flex:1;min-width:120px;font-size:.78rem;font-family:var(--i);padding:.15rem!important}
+
+/* MEDIA MANAGER */
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.7rem;margin-bottom:.8rem}
+.media-thumb{position:relative;border-radius:6px;overflow:hidden;background:var(--bg);border:1px solid var(--border);display:flex;flex-direction:column}
+.media-thumb img,.media-thumb video{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#000}
+.media-thumb .media-badge{position:absolute;top:.35rem;left:.35rem;background:rgba(0,0,0,.65);color:#fff;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;padding:.15rem .4rem}
+.media-thumb-remove{position:absolute;top:.3rem;right:.3rem;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:3px;padding:.2rem .35rem;font-size:.65rem;cursor:pointer;opacity:0;transition:opacity .15s}
+.media-thumb:hover .media-thumb-remove{opacity:1}
+.media-thumb input{border:none;border-top:1px solid var(--border);border-radius:0;font-size:.68rem;padding:.4rem .5rem}
+.media-add{border:1.5px dashed var(--border);border-radius:6px;aspect-ratio:3/2;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:.4rem;color:var(--muted);font-size:.7rem;transition:border-color .15s;background:#fff;text-align:center;padding:.5rem}
+.media-add:hover{border-color:var(--text);color:var(--text)}
 input[type=file]{display:none}
+.video-url-row{display:flex;gap:.5rem;margin-top:.4rem}
+.video-url-row input{flex:1}
 
-/* TECH STACK */
-.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.7rem;margin-bottom:.8rem}
-.tech-item{position:relative;border:1px solid var(--border);border-radius:6px;padding:.7rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:#fff}
-.tech-item img{width:36px;height:36px;object-fit:contain}
-.tech-item input{border:none;border-bottom:1px solid var(--border);border-radius:0;padding:.2rem .3rem;font-size:.7rem;text-align:center;width:100%}
-.tech-item input:focus{border-bottom-color:var(--text);outline:none}
-.tech-remove{position:absolute;top:.3rem;right:.3rem;background:none;border:none;cursor:pointer;color:var(--muted);font-size:.7rem;opacity:0;transition:opacity .15s}
-.tech-item:hover .tech-remove{opacity:1}
-.tech-add{border:1.5px dashed var(--border);border-radius:6px;padding:.7rem;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:.72rem;transition:all .15s;background:#fff;min-height:90px}
-.tech-add:hover{border-color:var(--text);color:var(--text)}
-
-/* EXPORT HINT */
-.export-hint{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1rem 1.2rem;margin-bottom:2rem;font-size:.78rem;line-height:1.7;color:#166534}
-.export-hint strong{font-weight:600}
-.export-hint ol{padding-left:1.2rem;margin-top:.5rem}
+/* CAPABILITY GROUPS */
+.cap-card .tag-box{margin-bottom:.3rem}
 
 /* TOAST */
 .toast{position:fixed;bottom:2rem;right:2rem;background:var(--text);color:#fff;padding:.75rem 1.2rem;border-radius:8px;font-size:.8rem;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.green{background:var(--green)}
-
-/* SECTION NAV BADGES */
-.section-count{font-size:.65rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.1rem .4rem;color:var(--muted);margin-left:auto}
 </style>
 </head>
 <body>
@@ -132,35 +128,16 @@ input[type=file]{display:none}
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-logo">CMS <span>/ Portfolio</span></div>
-    <div class="nav-item active" onclick="showPage('hero')" data-page="hero">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2.5 5 5.5.8-4 3.9.9 5.5L8 13.5 3.1 16.2l.9-5.5L0 6.8l5.5-.8z"/></svg>
-      Hero
-    </div>
-    <div class="nav-item" onclick="showPage('about')" data-page="about">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm0 2c-3.3 0-6 1.3-6 3v1h12v-1c0-1.7-2.7-3-6-3z"/></svg>
-      About
-    </div>
-    <div class="nav-item" onclick="showPage('projects')" data-page="projects">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5l2 2h5v10H2V2zm0 0"/></svg>
-      Projects
-    </div>
-    <div class="nav-item" onclick="showPage('techstack')" data-page="techstack">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 4l8-4 8 4-8 4-8-4zm0 4l8 4 8-4M0 12l8 4 8-4"/></svg>
-      Tech Stack
-    </div>
-    <div class="nav-item" onclick="showPage('clubs')" data-page="clubs">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 2a4 4 0 100 8A4 4 0 006 2zm10 2a3 3 0 100 6 3 3 0 000-6zm-4.5 9C9.6 13 8 14 6 14S2.4 13 .5 13C.2 14.3 0 15.1 0 16h12c0-.9-.2-1.7-.5-3zm6.5 0c-1 0-2.5.5-3.5 1 .3.9.4 1.3.5 2H16v-3z"/></svg>
-      Clubs
-    </div>
-    <div class="nav-item" onclick="showPage('achievements')" data-page="achievements">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L10 5h5l-4 3 1.5 5L8 10l-4.5 3L5 8 1 5h5z"/></svg>
-      Achievements
-    </div>
+    <div class="nav-item active" onclick="showPage('hero')" data-page="hero">Hero</div>
+    <div class="nav-item" onclick="showPage('casestudies')" data-page="casestudies">Case Studies</div>
+    <div class="nav-item" onclick="showPage('archive')" data-page="archive">Project Archive</div>
+    <div class="nav-item" onclick="showPage('capabilities')" data-page="capabilities">Capabilities</div>
+    <div class="nav-item" onclick="showPage('about')" data-page="about">About</div>
+    <div class="nav-item" onclick="showPage('clubs')" data-page="clubs">CCAs / Clubs</div>
+    <div class="nav-item" onclick="showPage('achievements')" data-page="achievements">Achievements</div>
+    <div class="nav-item" onclick="showPage('contact')" data-page="contact">Contact</div>
     <div class="sidebar-bottom">
-      <button class="save-btn" id="saveBtn" onclick="saveAndExport()">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M2 1h9l3 3v11H2V1zm5 9a2 2 0 100-4 2 2 0 000 4zm3-9H5v4h5V1z"/></svg>
-        Save &amp; Export JSON
-      </button>
+      <button class="save-btn" id="saveBtn" onclick="saveAndExport()">Save &amp; Export JSON</button>
     </div>
   </aside>
 
@@ -171,21 +148,57 @@ input[type=file]{display:none}
     <div class="page active" id="page-hero">
       <div class="page-header">
         <div class="page-title">Hero Section</div>
-        <div class="page-sub">The first thing visitors see — your name, year, and intro pills.</div>
+        <div class="page-sub">The hero now leads with what you build. Your name lives in the eyebrow and footer.</div>
       </div>
       <div class="card expanded">
         <div class="card-body" style="display:block">
           <div class="field-row">
             <div class="field"><label>Full Name</label><input type="text" id="heroName" placeholder="Reyes Tham"/></div>
-            <div class="field"><label>Year</label><input type="text" id="heroYear" placeholder="2025"/></div>
+            <div class="field"><label>Year</label><input type="text" id="heroYear" placeholder="2026"/></div>
           </div>
+          <div class="field"><label>Eyebrow <small>— small line above the headline</small></label><input type="text" id="heroEyebrow" placeholder="Reyes Tham — Portfolio 2026"/></div>
+          <div class="field"><label>Headline <small>— what you build, in one sentence</small></label><textarea id="heroHeadline" rows="2" placeholder="I build AI agents & automation that make slow work fast."></textarea></div>
+          <div class="field"><label>Subline <small>— one supporting sentence</small></label><textarea id="heroSubline" rows="2"></textarea></div>
           <div class="field">
-            <label>Introduction Pills</label>
+            <label>Pills <small>— short proof points</small></label>
             <div class="pills-list" id="pillsList"></div>
             <div class="add-row"><button class="icon-btn add" onclick="addPill()">+ Add Pill</button></div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- CASE STUDIES PAGE -->
+    <div class="page" id="page-casestudies">
+      <div class="page-header">
+        <div class="page-title">Case Studies</div>
+        <div class="page-sub">The three large featured cards on the site. Each can hold image cards and video cards for mockups.</div>
+        <span class="filo-note">First in, last out — new case studies are added to the top</span>
+      </div>
+      <button class="icon-btn add" style="margin-bottom:1rem;padding:.6rem 1rem;font-size:.78rem" onclick="addCaseStudy()">+ Add Case Study (to top)</button>
+      <div id="csCards"></div>
+    </div>
+
+    <!-- ARCHIVE PAGE -->
+    <div class="page" id="page-archive">
+      <div class="page-header">
+        <div class="page-title">Project Archive</div>
+        <div class="page-sub">Smaller projects listed under the case studies.</div>
+        <span class="filo-note">First in, last out — new projects are added to the top</span>
+      </div>
+      <button class="icon-btn add" style="margin-bottom:1rem;padding:.6rem 1rem;font-size:.78rem" onclick="addArchive()">+ Add Project (to top)</button>
+      <div id="archiveCards"></div>
+    </div>
+
+    <!-- CAPABILITIES PAGE -->
+    <div class="page" id="page-capabilities">
+      <div class="page-header">
+        <div class="page-title">Capabilities</div>
+        <div class="page-sub">Grouped skills replace the old logo marquee. Each group has a name and a list of items.</div>
+        <span class="filo-note">First in, last out — new groups are added to the top</span>
+      </div>
+      <button class="icon-btn add" style="margin-bottom:1rem;padding:.6rem 1rem;font-size:.78rem" onclick="addCapGroup()">+ Add Group (to top)</button>
+      <div id="capCards"></div>
     </div>
 
     <!-- ABOUT PAGE -->
@@ -200,38 +213,12 @@ input[type=file]{display:none}
             <div class="field"><label>Current Status</label><input type="text" id="aboutStatus"/></div>
             <div class="field"><label>Education</label><input type="text" id="aboutEdu"/></div>
           </div>
-          <div class="field-row">
-            <div class="field"><label>Award</label><input type="text" id="aboutAward"/></div>
-            <div class="field">
-            <label>Interests <span style="font-weight:300;text-transform:none;letter-spacing:0;color:#aaa">— press Enter or comma to add</span></label>
-            <div id="interestTagBox" style="display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;border:1px solid var(--border);border-radius:6px;padding:.5rem .7rem;min-height:42px;cursor:text" onclick="document.getElementById('interestInput').focus()"></div>
-            <input type="text" id="interestInput" placeholder="Type an interest and press Enter…" style="margin-top:.5rem" onkeydown="handleInterestKey(event)"/>
-          </div>
+          <div class="field"><label>Award</label><input type="text" id="aboutAward"/></div>
+          <div class="field">
+            <label>Interests <small>— press Enter or comma to add</small></label>
+            <div class="tag-box" id="interestTagBox" onclick="this.querySelector('input').focus()"></div>
           </div>
           <div class="field"><label>Biography</label><textarea id="aboutBio" rows="6"></textarea></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECTS PAGE -->
-    <div class="page" id="page-projects">
-      <div class="page-header">
-        <div class="page-title">Projects</div>
-        <div class="page-sub">Each project has a title, year, short description, and optional link.</div>
-      </div>
-      <div id="projectCards"></div>
-      <button class="icon-btn add" style="margin-top:.5rem;padding:.6rem 1rem;font-size:.78rem" onclick="addProject()">+ Add Project</button>
-    </div>
-
-    <!-- TECH STACK PAGE -->
-    <div class="page" id="page-techstack">
-      <div class="page-header">
-        <div class="page-title">Tech Stack</div>
-        <div class="page-sub">Upload tech icons that appear in the scrolling marquee.</div>
-      </div>
-      <div class="card expanded">
-        <div class="card-body" style="display:block">
-          <div class="tech-grid" id="techGrid"></div>
         </div>
       </div>
     </div>
@@ -239,11 +226,12 @@ input[type=file]{display:none}
     <!-- CLUBS PAGE -->
     <div class="page" id="page-clubs">
       <div class="page-header">
-        <div class="page-title">Clubs &amp; Societies</div>
-        <div class="page-sub">Upload photos and details for each club.</div>
+        <div class="page-title">CCAs / Clubs</div>
+        <div class="page-sub">Upload as many photos or video clips as you like per CCA — select multiple files at once.</div>
+        <span class="filo-note">First in, last out — new CCAs are added to the top</span>
       </div>
+      <button class="icon-btn add" style="margin-bottom:1rem;padding:.6rem 1rem;font-size:.78rem" onclick="addClub()">+ Add CCA (to top)</button>
       <div id="clubCards"></div>
-      <button class="icon-btn add" style="margin-top:.5rem;padding:.6rem 1rem;font-size:.78rem" onclick="addClub()">+ Add Club</button>
     </div>
 
     <!-- ACHIEVEMENTS PAGE -->
@@ -251,9 +239,27 @@ input[type=file]{display:none}
       <div class="page-header">
         <div class="page-title">Achievements</div>
         <div class="page-sub">Awards and recognitions.</div>
+        <span class="filo-note">First in, last out — new achievements are added to the top</span>
       </div>
+      <button class="icon-btn add" style="margin-bottom:1rem;padding:.6rem 1rem;font-size:.78rem" onclick="addAchievement()">+ Add Achievement (to top)</button>
       <div id="achievementCards"></div>
-      <button class="icon-btn add" style="margin-top:.5rem;padding:.6rem 1rem;font-size:.78rem" onclick="addAchievement()">+ Add Achievement</button>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page" id="page-contact">
+      <div class="page-header">
+        <div class="page-title">Contact</div>
+        <div class="page-sub">Feeds the contact section — heading, blurb, and your links.</div>
+      </div>
+      <div class="card expanded">
+        <div class="card-body" style="display:block">
+          <div class="field"><label>Heading</label><input type="text" id="contactHeading" placeholder="Let's build something."/></div>
+          <div class="field"><label>Blurb</label><textarea id="contactBlurb" rows="3"></textarea></div>
+          <div class="field"><label>Email</label><input type="email" id="contactEmail" placeholder="you@email.com"/></div>
+          <div class="field"><label>LinkedIn URL</label><input type="url" id="contactLinkedin" placeholder="https://www.linkedin.com/in/reyes-tham"/></div>
+          <div class="field"><label>GitHub URL</label><input type="url" id="contactGithub" placeholder="https://github.com/Reyes-Tham"/></div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -285,45 +291,40 @@ function showPage(name) {
 }
 
 /* ─── INLINE DATA FALLBACK ─── */
-const INLINE_DATA = {"hero":{"name":"Reyes Tham","year":"2025","pills":["Computer Engineering Graduate","NUS Computer Science 2026","NSF @ HQ RSAF","ST Engineering Prize"]},"about":{"status":"NSF @ HQ RSAF","education":"NUS Computer Science, 2026","award":"ST Engineering Prize","interests":["Software Engineering","Finance","Stock Trading","Travel","Fitness"],"bio":"I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."},"projects":[{"id":"p1","title":"Automated Projected Appointment","year":"2026","description":"An automated system for projecting and managing appointments, streamlining scheduling workflows.","link":""},{"id":"p2","title":"Automated CV Display System","year":"2025","description":"A dynamic CV display system that automatically formats and presents resume content.","link":""},{"id":"p3","title":"Data Sorting Application","year":"2024","description":"An application for sorting and organizing large datasets efficiently.","link":""},{"id":"p4","title":"Fruit Image Classifier","year":"2023","description":"A machine learning model trained to classify fruit images using convolutional neural networks.","link":""},{"id":"p5","title":"Library Inventory System","year":"2023","description":"A full-stack inventory management system for tracking library books and resources.","link":""},{"id":"p6","title":"Medicine Dispenser Project","year":"2023","description":"An IoT-enabled medicine dispenser that automates medication scheduling and dispensing.","link":""},{"id":"p7","title":"Virtual Marketplace","year":"2023","description":"A peer-to-peer virtual marketplace platform for buying and selling goods online.","link":""},{"id":"p8","title":"Mental Health Support Mobile App","year":"2023","description":"A mobile application providing mental health resources, mood tracking, and peer support features.","link":""}],"techStack":[{"name":"Tech","image":"https://framerusercontent.com/images/yI1YZeklbQLqDXIQcSpDujw6LQ.png?width=500"},{"name":"Tech","image":"https://framerusercontent.com/images/5wIXfNf0nWJfmJRJ2VWGMdFqV8.webp?width=256"},{"name":"Tech","image":"https://framerusercontent.com/images/HODfGABGNXj8Ca1nKow1wvD6ck.png?width=1280"},{"name":"Tech","image":"https://framerusercontent.com/images/9P3Br5ZmhomsFgEK6Lb4igyFbuw.png?width=960"},{"name":"Tech","image":"https://framerusercontent.com/images/9njUwDm7fwBXAsOJ7D4aerSfk.png?width=960"},{"name":"Tech","image":"https://framerusercontent.com/images/UdhL0urstLI2W3Jn6tmh9xqOBA.png?width=2400"},{"name":"Tech","image":"https://framerusercontent.com/images/3wIJv2SqSuvNhnk9dNjwHylMHk.png?width=500"},{"name":"Tech","image":"https://framerusercontent.com/images/3YI5ZMJHWykL7CJilFWl7N7Y.svg?width=2500"},{"name":"Tech","image":"https://framerusercontent.com/images/1Ha02vDmzNorrQ0yI6Q0Kw94AcM.svg?width=800"}],"clubs":[{"id":"c1","name":"SP Canoe Polo","roles":[{"title":"President","period":"Apr 23 – Apr 24"},{"title":"Vice-President","period":"Apr 22 – Apr 23"}],"description":"I spent two years in the SP Canoe Polo Executive Committee balancing high-level leadership with the physical grind of the sport. As President and Vice President, I helped the club achieve an Excellence Award in 2022 by setting ambitious SMART goals and overhauling recruitment. On the water, I competed in multiple university-level tournaments, secured two medals, and earned the honor of representing Singapore on the Under-21 National Team.","images":["https://framerusercontent.com/images/M5WhSbI8sWSkJmqmxyocyCbktCA.jpeg?width=1601","https://framerusercontent.com/images/DLyQwpYFJ7wKMum8v5MFjjYHJ4.jpeg?width=1600","https://framerusercontent.com/images/n27pVqbKAMXkqduKAOBolcLlb4.jpeg?width=1600"]},{"id":"c2","name":"HQ RSAF NSF Council","roles":[{"title":"President","period":"Dec 25 – Present"},{"title":"Vice-President","period":"Jul 25 – Dec 25"},{"title":"Events Head","period":"Dec 24 – Jul 25"}],"description":"I serve as a leader in the HQ RSAF NSF Council, making the NS journey more engaging and meaningful for my fellow airmen. My role involves mentoring the EXCO team, working closely with senior RSAF leadership to represent NSF perspectives, and coordinating large-scale learning visits to the Singapore Navy Museum, Indian Heritage Centre, and Singapore City Gallery.","images":["https://framerusercontent.com/images/euwHlSXktv0nMpPHhoV5IzlfdzU.jpeg?width=2048","https://framerusercontent.com/images/DtUnJxVbw23agLRvEkmsRz8ZYSY.jpeg?width=1600","https://framerusercontent.com/images/z5qdEX9hkg0oaJ1HUnulZAIOTos.jpeg?width=2048"]},{"id":"c3","name":"EEE Club","roles":[{"title":"Welfare Subcommittee","period":"Jul 21 – Apr 24"}],"description":"My leadership journey started early within the SP Electrical & Electronic Engineering Club's Welfare Committee. During COVID-19, I focused on maintaining student morale by coordinating exam welfare pack distribution. I also served as a Group Leader for student camps, finding creative ways to mentor new students and ensure they felt welcomed into the SP community.","images":["https://framerusercontent.com/images/JI14UYX8sqf64X12QUDb8T16Q.jpeg?width=2048","https://framerusercontent.com/images/wVw0enTIb2EYL1Szue2d3dDCI.jpeg?width=1600","https://framerusercontent.com/images/LQOxFHgtJwYuKittBvMwA2fRM6I.jpeg?width=2048"]}],"achievements":[{"id":"a1","title":"Best Airman of the Month","date":"Oct 2025","description":"Awarded Best Airman of the Month at HQ RSAF for outstanding performance and leadership.","link":""},{"id":"a2","title":"ST Engineering Prize","date":"Apr 2024","description":"Awarded the ST Engineering Prize for academic excellence in Engineering.","link":""},{"id":"a3","title":"Edusave Academic Award 2024","date":"Apr 2024","description":"Edusave Academic Award recognising outstanding academic performance.","link":""},{"id":"a4","title":"Edusave Academic Award 2023","date":"Sep 2023","description":"Edusave Academic Award recognising outstanding academic performance.","link":""},{"id":"a5","title":"Director's Honor Roll","date":"Jul 2023","description":"Named to the Director's Honor Roll for exceptional academic achievement.","link":""},{"id":"a6","title":"National Canoe Polo Champion","date":"Jul 2023","description":"Won the National Canoe Polo Championship representing Singapore.","link":""},{"id":"a7","title":"NTU Canoe Polo Champion","date":"Jan 2023","description":"Won the NTU Canoe Polo Championship.","link":""},{"id":"a8","title":"Edusave Academic Award 2022","date":"Sep 2022","description":"Edusave Academic Award recognising outstanding academic performance.","link":""}]};
+const INLINE_DATA = {"hero":{"name":"Reyes Tham","year":"2026","eyebrow":"Reyes Tham — Portfolio 2026","headline":"I build AI agents & automation that make slow work fast.","subline":"Computer Engineering graduate, NUS Computer Science from 2026. Currently NSF at HQ RSAF — shipping tools that save people hours every week.","pills":["AI Agents & LLM Tooling","Workflow Automation","Full-Stack & Mobile","ML & Data Systems"]},"about":{"status":"NSF @ HQ RSAF","education":"NUS Computer Science, 2026","award":"ST Engineering Prize","interests":["Software Engineering","Finance","Stock Trading","Travel","Fitness"],"bio":"I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."},"caseStudies":[{"id":"cs1","title":"Telegram AI Chat Bot","year":"2026","tag":"AI · Agents · Automation","summary":"A Python-based Telegram AI assistant with a modular multi-agent architecture — agents communicate with one another and form a small autonomous AI ecosystem. Scheduled prompting delivers automated daily briefings, real-time stock tracking surfaces the latest market news, and task automation workflows retrieve stock insights and job listings without being asked.","outcome":"A personal AI ecosystem that runs briefings, market tracking and job hunts on autopilot.","stack":["Python","Anthropic API","Finnhub","Yahoo Finance","Render"],"link":"https://github.com/Reyes-Tham/ReyesV2","media":[]},{"id":"cs2","title":"Data Sorting Application","year":"2024","tag":"Desktop · Data Tooling","summary":"A data sorting application built for mVizn Pte Ltd with built-in image editing tools, using Java and MySQL. Designed and implemented the core features for organizing large datasets efficiently while letting users edit and manage images directly on the Windows platform.","outcome":"Improved the company's data sorting efficiency by 40%.","stack":["Java","MySQL","Windows"],"link":"https://github.com/Reyes-Tham/Mvizn_datasort","media":[]},{"id":"cs3","title":"Library Inventory System","year":"2023","tag":"Full-Stack · Desktop","summary":"A Java desktop application using JavaFX and MySQL to manage library inventory, borrowing records and user accounts. Implemented OOP design patterns, fine calculation logic, search and filtering, admin dashboards and statistical reporting, with the JavaMail API triggering automated overdue notifications.","outcome":"Automated overdue notifications improved return compliance and operational efficiency.","stack":["Java","JavaFX","MySQL","JavaMail"],"link":"https://github.com/Reyes-Tham/LibrarianApp","media":[]}],"archive":[{"id":"p2","title":"Automated Projected Appointment","year":"2026","description":"Developed an automated template filler using Excel and VBA for projected RSAF officer appointments that helps visualize and define timetable boundaries, streamlining scheduling and improving planning efficiency.","link":""},{"id":"p3","title":"Automated CV Display System","year":"2025","description":"Developed a CV display system for RSAF HR department that allows viewing of crucial personnel information such as photo, rank, past appointments, age, and more using Excel and VBA automation, improving efficiency in managing records.","link":""},{"id":"p5","title":"Fruit Image Classifier","year":"2023","description":"Developed a machine learning image classification system using Python and TensorFlow to distinguish between bananas and oranges. Implemented a Convolutional Neural Network (CNN) with image preprocessing, model training, and evaluation to improve accuracy. Built an Android mobile application to integrate the trained model, allowing users to upload or capture images for real-time fruit classification.","link":"https://drive.google.com/drive/folders/1weofo0C78aML2x4Wn_Pfd6SRw7QQRwRo?usp=drive_link"},{"id":"p7","title":"Medicine Dispenser Project","year":"2023","description":"Led the development of a medicine dispenser utilizing the PIC18 microcontroller interfaced with motors, LCD, displays, keypads, and Bluetooth modules to assist elderly individuals with medication management.","link":"https://drive.google.com/drive/folders/1cdcTI9fdau6AkFIs-BmtNXdgnkw4WVEi?usp=drive_link"},{"id":"p8","title":"Virtual Marketplace","year":"2023","description":"Worked in a team to build an e-commerce web application from scratch using HTML, PHP, and AstraDB (NoSQL), designed as a virtual marketplace. I handled the UI/UX design and developed key features like user authentication, product listings, and a real-time chat system for buyer-seller communication. Used GitHub to manage branches and track different versions of the codebase, ensuring smooth collaboration and version control.","link":"https://drive.google.com/drive/folders/1fTh0MaJlMFKDgivGnIaQwoJllECBZf7N?usp=drive_link"},{"id":"p9","title":"Mental Health Support Mobile App","year":"2023","description":"Developed a mental health support mobile application using Android Studio with Java, integrating Firebase services for cloud database storage. Implemented features such as mood tracking, journaling, and secure data management to support daily mental wellness and habit monitoring.","link":"https://drive.google.com/drive/folders/1cqmbqLGfuBRIgfdemL4J1dihSl9KwKu5?usp=drive_link"}],"capabilities":[{"group":"AI & Machine Learning","items":["LLM agents & multi-agent systems (Anthropic API)","TensorFlow & convolutional neural networks","Prompt & workflow design","Model training, evaluation & mobile integration"]},{"group":"Automation & Systems","items":["Excel / VBA process automation","Scheduled tasks & data pipelines","IoT & embedded systems (PIC18, Bluetooth)","Cloud deployment (Render, GitHub Pages)"]},{"group":"Full-Stack & Mobile","items":["Java · JavaFX desktop applications","Android apps (Java, Firebase)","HTML / CSS / JavaScript · PHP","REST APIs & real-time chat"]},{"group":"Data & Storage","items":["MySQL · Firebase · AstraDB (NoSQL)","Data sorting & reporting tools","Financial & market data APIs","Git & GitHub version control"]}],"clubs":[{"id":"c1","name":"SP Canoe Polo","roles":[{"title":"President","period":"Apr 23 – Apr 24"},{"title":"Vice-President","period":"Apr 22 – Apr 23"}],"description":"I spent my two years in the Singapore Polytechnic (SP) Canoe Polo Executive Committee balancing the demands of high-level leadership with the physical grind of the sport. As President and Vice President, I helped the club achieve an Excellence Award in 2022 by setting ambitious SMART goals and overhauling our recruitment. On the water, I pushed myself just as hard, competing in multiple university-level tournaments where I secured two medals and eventually earned the honor of representing Singapore on the Under-21 National Team.\n\nOne of my biggest challenges was stepping up as the Organizing Chairman for the SP Canoe Polo Opens Championship. I was responsible for the entire timeline, managing a team that handled everything from logistics and sponsorship to the refereeing panel. I also made it a point to share the technical side of the sport through boat repair workshops and led 'Sports for Life' sessions to encourage fitness across the campus.  \n\nBeyond the competition and the gear, I wanted our club to make a real impact. I collaborated with external partners to host a community service event for injured migrant workers, giving them a guided tour of Gardens by the Bay. Whether I was representing the country or managing a committee, my goal was to leave the club with a stronger legacy and a deeper connection to the community.","images":["https://framerusercontent.com/images/M5WhSbI8sWSkJmqmxyocyCbktCA.jpeg?width=1601","https://framerusercontent.com/images/DLyQwpYFJ7wKMum8v5MFjjYHJ4.jpeg?width=1600","https://framerusercontent.com/images/n27pVqbKAMXkqduKAOBolcLlb4.jpeg?width=1600"]},{"id":"c2","name":"HQ RSAF NSF Council","roles":[{"title":"President","period":"Dec 25 – Present"},{"title":"Vice-President","period":"Jul 25 – Dec 25"},{"title":"Events Head","period":"Dec 24 – Jul 25"}],"description":"I currently serve as a leader in the Headerquarters Republic Of Singapore Airforce (HQ RSAF) NSF Council, where my main goal is to make the NS journey more engaging and meaningful for my fellow airmen. A big part of my role involves mentoring my EXCO team and handling our internal operations, while also working closely with senior leadership in the Republic of Singapore Air Force to represent NSF perspectives and bridge the gap between ground experiences and HQ decisions. From welcoming new batches of recruits during induction talks to planning our yearly direction, I'm motivated by the idea of building a stronger and more connected NSF community. \n\nAs the Event Head, I focus on creating activities that are both enjoyable and meaningful. I've coordinated large-scale learning visits to places like the Singapore Navy Museum, the Indian Heritage Centre, and the Singapore City Gallery. I handled everything from logistics and transport planning to the overall program flow. Beyond just organizing outings, these experiences were designed to help NSFs better appreciate our national identity and understand the wider defence ecosystem. By balancing advocacy work with hands-on event execution, I aim to make sure every NSF feels welcomed, supported, and valued from the very start of their journey.","images":["https://framerusercontent.com/images/euwHlSXktv0nMpPHhoV5IzlfdzU.jpeg?width=2048","https://framerusercontent.com/images/DtUnJxVbw23agLRvEkmsRz8ZYSY.jpeg?width=1600","https://framerusercontent.com/images/z5qdEX9hkg0oaJ1HUnulZAIOTos.jpeg?width=2048"]},{"id":"c3","name":"EEE Club","roles":[{"title":"Welfare Subcommittee","period":"Jul 21 – Apr 24"}],"description":"My involvement in leadership started early at Singapore Polytechnic (SP) within the Electrical & Electronic Engineering (EEE) Club, where I served on the Welfare Committee. During the height of the COVID-19 pandemic, I focused on maintaining student morale by coordinating the distribution of exam welfare packs to help my peers through a stressful academic season. I also stepped up as a Group Leader for our student camps, which was a unique challenge during that period. I had to find creative ways to mentor and engage a fresh batch of students, ensuring they felt welcomed into the SP community despite the social distancing hurdles and the shift to a hybrid campus life.","images":["https://framerusercontent.com/images/JI14UYX8sqf64X12QUDb8T16Q.jpeg?width=2048","https://framerusercontent.com/images/wVw0enTIb2EYL1Szue2d3dDCI.jpeg?width=1600","https://framerusercontent.com/images/LQOxFHgtJwYuKittBvMwA2fRM6I.jpeg?width=2048"]}],"achievements":[{"id":"a1","title":"Best Airman of the Month","date":"Oct 2025","description":"Awarded Best Airman of the Month at HQ RSAF for outstanding performance and leadership.","link":""},{"id":"a2","title":"ST Engineering Prize","date":"Apr 2024","description":"Awarded upon graduating from Singapore Polytechnic, the ST Engineering Prize is given to top students who have demonstrated exceptional academic performance and potential.","link":""},{"id":"a3","title":"Edusave Academic Award 2024","date":"Apr 2024","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""},{"id":"a4","title":"Edusave Academic Award 2023","date":"Sep 2023","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""},{"id":"a5","title":"Director's Honor Roll (AY2022/2023)","date":"Jul 2023","description":"Named to the Director's Honor Roll for exceptional academic achievement.","link":""},{"id":"a6","title":"National Canoe Polo Championship 2023","date":"Jul 2023","description":"Achieved Second runner up","link":""},{"id":"a7","title":"NTU Canoe Polo Championship 2023","date":"Jan 2023","description":"Achieved First runner up","link":""},{"id":"a8","title":"Edusave Academic Award 2022","date":"Sep 2022","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""}],"contact":{"heading":"Let's build something.","blurb":"I'm open to software engineering internships, collaborations, and good conversations about AI, automation and finance. The fastest way to reach me is email or LinkedIn.","email":"rtmf1211@gmail.com","linkedin":"https://www.linkedin.com/in/reyes-tham","github":"https://github.com/Reyes-Tham"}};
 
-/* ─── INTERESTS TAG EDITOR ─── */
-function renderInterests() {
-  const box = document.getElementById('interestTagBox');
-  if (!D.about.interests) D.about.interests = [];
-  box.innerHTML = D.about.interests.map((tag, i) => `
-    <span style="display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--border);border-radius:2rem;padding:.22rem .65rem;font-size:.75rem;font-family:var(--i)">
-      ${esc(tag)}
-      <button onclick="D.about.interests.splice(${i},1);renderInterests()" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:.7rem;line-height:1;padding:0;margin-left:.1rem">✕</button>
-    </span>`).join('');
-}
-function handleInterestKey(e) {
-  if (e.key === 'Enter' || e.key === ',') {
-    e.preventDefault();
-    const val = e.target.value.replace(/,/g,'').trim();
-    if (val && !D.about.interests.includes(val)) {
-      D.about.interests.push(val);
-      renderInterests();
-    }
-    e.target.value = '';
+/* ─── MIGRATION (accepts the old projects/techStack schema) ─── */
+function migrate(d) {
+  if (!d.caseStudies && Array.isArray(d.projects)) {
+    d.caseStudies = d.projects.slice(0, 3).map(p => ({
+      ...p, tag: '', summary: p.description || '', outcome: '', stack: [], media: []
+    }));
+    d.archive = d.projects.slice(3);
+    delete d.projects;
   }
+  d.caseStudies = (d.caseStudies || []).map(c => ({ media: [], stack: [], tag: '', summary: '', outcome: '', link: '', ...c }));
+  d.archive = d.archive || [];
+  d.capabilities = d.capabilities || [];
+  d.contact = d.contact || { heading: "Let's build something.", blurb: '', email: '', linkedin: '', github: '' };
+  d.hero.eyebrow = d.hero.eyebrow || `${d.hero.name} — Portfolio ${d.hero.year}`;
+  d.hero.headline = d.hero.headline || '';
+  d.hero.subline = d.hero.subline || '';
+  delete d.techStack;
+  if (typeof d.about.interests === 'string') {
+    d.about.interests = d.about.interests.split('·').map(s=>s.trim()).filter(Boolean);
+  }
+  return d;
 }
 
 /* ─── INIT ─── */
 async function initAdmin() {
   try {
     const res = await fetch('data.json?v='+Date.now());
-    if (res.ok) {
-      D = await res.json();
-    } else { throw new Error(); }
+    if (res.ok) { D = await res.json(); } else { throw new Error(); }
   } catch(e) {
-    // Running as local file — use inline data so all fields are pre-filled
     D = JSON.parse(JSON.stringify(INLINE_DATA));
   }
-  // Migrate old string format to array
-  if (typeof D.about.interests === 'string') {
-    D.about.interests = D.about.interests.split('·').map(s=>s.trim()).filter(Boolean);
-  }
+  D = migrate(D);
   populateAll();
 }
 
@@ -331,20 +332,59 @@ function populateAll() {
   // Hero
   document.getElementById('heroName').value = D.hero.name;
   document.getElementById('heroYear').value = D.hero.year;
+  document.getElementById('heroEyebrow').value = D.hero.eyebrow;
+  document.getElementById('heroHeadline').value = D.hero.headline;
+  document.getElementById('heroSubline').value = D.hero.subline;
   renderPills();
 
   // About
   document.getElementById('aboutStatus').value = D.about.status;
   document.getElementById('aboutEdu').value = D.about.education;
   document.getElementById('aboutAward').value = D.about.award;
-  renderInterests();
+  renderTagBox('interestTagBox', D.about.interests, 'Type an interest…');
   document.getElementById('aboutBio').value = D.about.bio;
 
-  // Others
-  renderProjects();
-  renderTechStack();
+  // Contact
+  document.getElementById('contactHeading').value = D.contact.heading || '';
+  document.getElementById('contactBlurb').value = D.contact.blurb || '';
+  document.getElementById('contactEmail').value = D.contact.email || '';
+  document.getElementById('contactLinkedin').value = D.contact.linkedin || '';
+  document.getElementById('contactGithub').value = D.contact.github || '';
+
+  renderCaseStudies();
+  renderArchive();
+  renderCapabilities();
   renderClubs();
   renderAchievements();
+}
+
+/* ─── GENERIC TAG EDITOR ───
+   Renders chips + an inline input into a .tag-box. `arr` is mutated live. */
+const tagArrays = {};
+function renderTagBox(boxId, arr, placeholder) {
+  tagArrays[boxId] = arr;
+  const box = document.getElementById(boxId);
+  if (!box) return;
+  box.innerHTML = arr.map((tag, i) => `
+    <span class="tag-chip">${esc(tag)}
+      <button onclick="event.stopPropagation();tagArrays['${boxId}'].splice(${i},1);renderTagBox('${boxId}',tagArrays['${boxId}'],'${esc(placeholder)}')">✕</button>
+    </span>`).join('') +
+    `<input class="tag-input" type="text" placeholder="${esc(placeholder)}" onkeydown="handleTagKey(event,'${boxId}','${esc(placeholder)}')"/>`;
+}
+function handleTagKey(e, boxId, placeholder) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.replace(/,/g,'').trim();
+    const arr = tagArrays[boxId];
+    if (val && !arr.includes(val)) arr.push(val);
+    renderTagBox(boxId, arr, placeholder);
+    document.querySelector(`#${boxId} .tag-input`).focus();
+  }
+  if (e.key === 'Backspace' && !e.target.value && tagArrays[boxId].length) {
+    tagArrays[boxId].pop();
+    renderTagBox(boxId, tagArrays[boxId], placeholder);
+    document.querySelector(`#${boxId} .tag-input`).focus();
+  }
 }
 
 /* ─── PILLS ─── */
@@ -358,88 +398,173 @@ function renderPills() {
 }
 function addPill() { D.hero.pills.push('New Pill'); renderPills(); }
 
-/* ─── PROJECTS ─── */
-function renderProjects() {
-  const el = document.getElementById('projectCards');
-  el.innerHTML = D.projects.map((p,i) => `
-    <div class="card" id="proj-card-${i}">
-      <div class="card-head" onclick="toggleCard('proj-card-${i}')">
-        <div class="card-head-left"><div class="card-head-num">${i+1}</div>${esc(p.title)}</div>
+/* ─── CARD HEAD (shared) ─── */
+function cardHead(cardId, i, name, listName, renderFn) {
+  return `
+    <div class="card-head" onclick="toggleCard('${cardId}')">
+      <div class="card-head-left"><div class="card-head-num">${i+1}</div><span class="name">${esc(name)}</span></div>
+      <div class="card-head-actions">
+        <button class="move-btn" title="Move up" onclick="event.stopPropagation();moveItem('${listName}',${i},-1,${renderFn})">↑</button>
+        <button class="move-btn" title="Move down" onclick="event.stopPropagation();moveItem('${listName}',${i},1,${renderFn})">↓</button>
         <span class="card-chevron">▼</span>
       </div>
-      <div class="card-body">
-        <div class="field-row-3">
-          <div class="field"><label>Title</label><input type="text" value="${esc(p.title)}" onchange="D.projects[${i}].title=this.value;refreshCardHead('proj-card-${i}',${i},'proj')"/></div>
-          <div class="field"><label>Year</label><input type="text" value="${esc(p.year)}" onchange="D.projects[${i}].year=this.value"/></div>
-        </div>
-        <div class="field"><label>Description</label><textarea onchange="D.projects[${i}].description=this.value">${esc(p.description)}</textarea></div>
-        <div class="field"><label>Link (optional)</label><input type="url" value="${esc(p.link)}" placeholder="https://github.com/..." onchange="D.projects[${i}].link=this.value"/></div>
-        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.projects.splice(${i},1);renderProjects()">Delete Project</button></div>
-      </div>
-    </div>`).join('');
+    </div>`;
 }
-function addProject() {
-  D.projects.push({id:'p'+Date.now(),title:'New Project',year:new Date().getFullYear()+'',description:'',link:''});
-  renderProjects();
-  const cards = document.querySelectorAll('#projectCards .card');
-  cards[cards.length-1].classList.add('expanded');
-  toast('Project added');
+function moveItem(listName, i, dir, renderFn) {
+  const arr = D[listName];
+  const j = i + dir;
+  if (j < 0 || j >= arr.length) return;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+  renderFn();
 }
 
-/* ─── TECH STACK ─── */
-function renderTechStack() {
-  const grid = document.getElementById('techGrid');
-  grid.innerHTML = D.techStack.map((t,i) => `
-    <div class="tech-item">
-      <button class="tech-remove" onclick="D.techStack.splice(${i},1);renderTechStack()">✕</button>
-      <img src="${t.image}" alt="${esc(t.name)}" onerror="this.style.opacity='.3'" />
-      <input type="text" value="${esc(t.name)}" placeholder="Name" onchange="D.techStack[${i}].name=this.value"/>
-    </div>`).join('') +
-    `<label class="tech-add" for="techUpload-new">
-      <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 2v8M4 6l4-4 4 4M2 14h12"/></svg>
-      Add Icon
-    </label>
-    <input type="file" id="techUpload-new" accept="image/*" onchange="uploadTech(this)"/>`;
+/* ─── CASE STUDIES ─── */
+function renderCaseStudies() {
+  const el = document.getElementById('csCards');
+  el.innerHTML = D.caseStudies.map((c,i) => `
+    <div class="card" id="cs-card-${i}">
+      ${cardHead('cs-card-'+i, i, c.title, 'caseStudies', 'renderCaseStudies')}
+      <div class="card-body">
+        <div class="field-row-3">
+          <div class="field"><label>Title</label><input type="text" value="${esc(c.title)}" onchange="D.caseStudies[${i}].title=this.value;renderCaseStudies();expandCard('cs-card-${i}')"/></div>
+          <div class="field"><label>Year</label><input type="text" value="${esc(c.year)}" onchange="D.caseStudies[${i}].year=this.value"/></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Tag <small>— e.g. AI · Automation</small></label><input type="text" value="${esc(c.tag)}" onchange="D.caseStudies[${i}].tag=this.value"/></div>
+          <div class="field"><label>Link (optional)</label><input type="url" value="${esc(c.link)}" placeholder="https://github.com/..." onchange="D.caseStudies[${i}].link=this.value"/></div>
+        </div>
+        <div class="field"><label>Summary</label><textarea rows="4" onchange="D.caseStudies[${i}].summary=this.value">${esc(c.summary)}</textarea></div>
+        <div class="field"><label>Outcome <small>— one line of impact, shown highlighted</small></label><input type="text" value="${esc(c.outcome)}" onchange="D.caseStudies[${i}].outcome=this.value"/></div>
+        <div class="field">
+          <label>Stack <small>— press Enter to add</small></label>
+          <div class="tag-box" id="cs-stack-${i}" onclick="this.querySelector('input').focus()"></div>
+        </div>
+        <div class="field">
+          <label>Media <small>— image cards &amp; video cards for mockups</small></label>
+          <div class="media-grid" id="cs-media-${i}"></div>
+          <div class="video-url-row">
+            <input type="url" id="cs-vurl-${i}" placeholder="Paste a YouTube / Vimeo / .mp4 URL for a video mockup"/>
+            <button class="icon-btn add" onclick="addVideoUrl(${i})">+ Add Video URL</button>
+          </div>
+        </div>
+        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.caseStudies.splice(${i},1);renderCaseStudies()">Delete Case Study</button></div>
+      </div>
+    </div>`).join('');
+  D.caseStudies.forEach((c,i) => {
+    renderTagBox('cs-stack-'+i, c.stack, 'Add tech…');
+    renderMedia(i);
+  });
 }
-function uploadTech(input) {
+function renderMedia(i) {
+  const c = D.caseStudies[i];
+  const grid = document.getElementById('cs-media-'+i);
+  if (!grid) return;
+  grid.innerHTML = c.media.map((m,mi) => `
+    <div class="media-thumb">
+      <span class="media-badge">${m.type === 'video' ? 'Video' : 'Image'}</span>
+      ${m.type === 'video'
+        ? (m.src.startsWith('data:') || /\.(mp4|webm|mov|m4v)(\?|$)/i.test(m.src)
+            ? `<video src="${esc(m.src)}" muted preload="metadata"></video>`
+            : `<div style="aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-size:.65rem;padding:.5rem;text-align:center;word-break:break-all">${esc(m.src.slice(0,60))}…</div>`)
+        : `<img src="${esc(m.src)}" alt=""/>`}
+      <button class="media-thumb-remove" onclick="D.caseStudies[${i}].media.splice(${mi},1);renderMedia(${i})">Remove</button>
+      <input type="text" value="${esc(m.caption||'')}" placeholder="Caption…" onchange="D.caseStudies[${i}].media[${mi}].caption=this.value"/>
+    </div>`).join('') + `
+    <label class="media-add" for="cs-upload-${i}">⇧ Upload images / videos<br><small style="color:#bbb">multiple files allowed</small></label>
+    <input type="file" id="cs-upload-${i}" accept="image/*,video/*" multiple onchange="uploadMedia(this,${i})"/>`;
+}
+function uploadMedia(input, i) {
   Array.from(input.files).forEach(file => {
     const reader = new FileReader();
     reader.onload = e => {
-      D.techStack.push({name: file.name.replace(/\.[^.]+$/,''), image: e.target.result});
-      renderTechStack();
+      D.caseStudies[i].media.push({
+        type: file.type.startsWith('video') ? 'video' : 'image',
+        src: e.target.result,
+        caption: ''
+      });
+      renderMedia(i);
     };
     reader.readAsDataURL(file);
   });
+  input.value = '';
+}
+function addVideoUrl(i) {
+  const inp = document.getElementById('cs-vurl-'+i);
+  const url = inp.value.trim();
+  if (!url) return;
+  D.caseStudies[i].media.push({ type: 'video', src: url, caption: '' });
+  inp.value = '';
+  renderMedia(i);
+  toast('Video card added');
+}
+function addCaseStudy() {
+  // FILO — newest goes to the top
+  D.caseStudies.unshift({id:'cs'+Date.now(),title:'New Case Study',year:new Date().getFullYear()+'',tag:'',summary:'',outcome:'',stack:[],link:'',media:[]});
+  renderCaseStudies();
+  expandCard('cs-card-0');
+  toast('Case study added to top' + (D.caseStudies.length > 3 ? ' — note: the site features the first three' : ''));
 }
 
-/* ─── CLUBS ─── */
+/* ─── ARCHIVE ─── */
+function renderArchive() {
+  const el = document.getElementById('archiveCards');
+  el.innerHTML = D.archive.map((p,i) => `
+    <div class="card" id="arch-card-${i}">
+      ${cardHead('arch-card-'+i, i, p.title, 'archive', 'renderArchive')}
+      <div class="card-body">
+        <div class="field-row-3">
+          <div class="field"><label>Title</label><input type="text" value="${esc(p.title)}" onchange="D.archive[${i}].title=this.value;renderArchive();expandCard('arch-card-${i}')"/></div>
+          <div class="field"><label>Year</label><input type="text" value="${esc(p.year)}" onchange="D.archive[${i}].year=this.value"/></div>
+        </div>
+        <div class="field"><label>Description</label><textarea onchange="D.archive[${i}].description=this.value">${esc(p.description)}</textarea></div>
+        <div class="field"><label>Link (optional)</label><input type="url" value="${esc(p.link)}" placeholder="https://github.com/..." onchange="D.archive[${i}].link=this.value"/></div>
+        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.archive.splice(${i},1);renderArchive()">Delete Project</button></div>
+      </div>
+    </div>`).join('');
+}
+function addArchive() {
+  D.archive.unshift({id:'p'+Date.now(),title:'New Project',year:new Date().getFullYear()+'',description:'',link:''});
+  renderArchive();
+  expandCard('arch-card-0');
+  toast('Project added to top');
+}
+
+/* ─── CAPABILITIES ─── */
+function renderCapabilities() {
+  const el = document.getElementById('capCards');
+  el.innerHTML = D.capabilities.map((g,i) => `
+    <div class="card cap-card" id="cap-card-${i}">
+      ${cardHead('cap-card-'+i, i, g.group, 'capabilities', 'renderCapabilities')}
+      <div class="card-body">
+        <div class="field"><label>Group Name</label><input type="text" value="${esc(g.group)}" onchange="D.capabilities[${i}].group=this.value;renderCapabilities();expandCard('cap-card-${i}')"/></div>
+        <div class="field">
+          <label>Items <small>— press Enter to add</small></label>
+          <div class="tag-box" id="cap-items-${i}" onclick="this.querySelector('input').focus()"></div>
+        </div>
+        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.capabilities.splice(${i},1);renderCapabilities()">Delete Group</button></div>
+      </div>
+    </div>`).join('');
+  D.capabilities.forEach((g,i) => renderTagBox('cap-items-'+i, g.items, 'Add skill…'));
+}
+function addCapGroup() {
+  D.capabilities.unshift({group:'New Group',items:[]});
+  renderCapabilities();
+  expandCard('cap-card-0');
+  toast('Capability group added to top');
+}
+
+/* ─── CLUBS / CCAs ─── */
 function renderClubs() {
   const el = document.getElementById('clubCards');
   el.innerHTML = D.clubs.map((c,ci) => `
     <div class="card" id="club-card-${ci}">
-      <div class="card-head" onclick="toggleCard('club-card-${ci}')">
-        <div class="card-head-left"><div class="card-head-num">${ci+1}</div>${esc(c.name)}</div>
-        <span class="card-chevron">▼</span>
-      </div>
+      ${cardHead('club-card-'+ci, ci, c.name, 'clubs', 'renderClubs')}
       <div class="card-body">
-        <div class="field"><label>Club Name</label><input type="text" value="${esc(c.name)}" onchange="D.clubs[${ci}].name=this.value;refreshCardHead('club-card-${ci}',${ci},'club')"/></div>
+        <div class="field"><label>CCA Name</label><input type="text" value="${esc(c.name)}" onchange="D.clubs[${ci}].name=this.value;renderClubs();expandCard('club-card-${ci}')"/></div>
 
         <div class="field">
-          <label>Photos (up to 5)</label>
-          <div class="img-grid" id="club-imgs-${ci}">
-            ${c.images.map((img,ii) => `
-              <div class="img-thumb">
-                <img src="${img}" alt=""/>
-                <button class="img-thumb-remove" onclick="D.clubs[${ci}].images.splice(${ii},1);renderClubImgs(${ci})">Remove</button>
-              </div>`).join('')}
-            ${c.images.length < 5 ? `
-              <label class="img-add" for="club-upload-${ci}">
-                <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 2v8M4 6l4-4 4 4M2 14h12"/></svg>
-                Upload
-              </label>
-              <input type="file" id="club-upload-${ci}" accept="image/*" multiple onchange="uploadClubImg(this,${ci})"/>
-            ` : ''}
-          </div>
+          <label>Photos &amp; Videos <small>— no limit, multi-select supported</small></label>
+          <div class="media-grid" id="club-imgs-${ci}"></div>
         </div>
 
         <div class="field">
@@ -456,24 +581,25 @@ function renderClubs() {
         </div>
 
         <div class="field"><label>Description</label><textarea rows="5" onchange="D.clubs[${ci}].description=this.value">${esc(c.description)}</textarea></div>
-        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.clubs.splice(${ci},1);renderClubs()">Delete Club</button></div>
+        <div style="margin-top:1rem;text-align:right"><button class="icon-btn" style="color:var(--red);border-color:var(--red)" onclick="D.clubs.splice(${ci},1);renderClubs()">Delete CCA</button></div>
       </div>
     </div>`).join('');
+  D.clubs.forEach((c,ci) => renderClubImgs(ci));
 }
 function renderClubImgs(ci) {
   const c = D.clubs[ci];
-  document.getElementById('club-imgs-'+ci).innerHTML =
-    c.images.map((img,ii) => `
-      <div class="img-thumb">
-        <img src="${img}" alt=""/>
-        <button class="img-thumb-remove" onclick="D.clubs[${ci}].images.splice(${ii},1);renderClubImgs(${ci})">Remove</button>
-      </div>`).join('') +
-    (c.images.length < 5 ? `
-      <label class="img-add" for="club-upload-${ci}-r">
-        <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 2v8M4 6l4-4 4 4M2 14h12"/></svg>Upload
-      </label>
-      <input type="file" id="club-upload-${ci}-r" accept="image/*" multiple onchange="uploadClubImg(this,${ci})"/>
-    ` : '');
+  const grid = document.getElementById('club-imgs-'+ci);
+  if (!grid) return;
+  grid.innerHTML = c.images.map((src,ii) => `
+    <div class="media-thumb">
+      <span class="media-badge">${src.startsWith('data:video') || /\.(mp4|webm|mov|m4v)(\?|$)/i.test(src) ? 'Video' : 'Image'}</span>
+      ${src.startsWith('data:video') || /\.(mp4|webm|mov|m4v)(\?|$)/i.test(src)
+        ? `<video src="${esc(src)}" muted preload="metadata"></video>`
+        : `<img src="${esc(src)}" alt=""/>`}
+      <button class="media-thumb-remove" onclick="D.clubs[${ci}].images.splice(${ii},1);renderClubImgs(${ci})">Remove</button>
+    </div>`).join('') + `
+    <label class="media-add" for="club-upload-${ci}">⇧ Upload photos / videos<br><small style="color:#bbb">multiple files allowed</small></label>
+    <input type="file" id="club-upload-${ci}" accept="image/*,video/*" multiple onchange="uploadClubImg(this,${ci})"/>`;
 }
 function renderClubRoles(ci) {
   const c = D.clubs[ci];
@@ -488,22 +614,22 @@ function uploadClubImg(input, ci) {
   Array.from(input.files).forEach(file => {
     const reader = new FileReader();
     reader.onload = e => {
-      if (D.clubs[ci].images.length < 5) {
-        D.clubs[ci].images.push(e.target.result);
-        renderClubImgs(ci);
-      }
+      D.clubs[ci].images.push(e.target.result);
+      renderClubImgs(ci);
     };
     reader.readAsDataURL(file);
   });
+  input.value = '';
 }
 function addRole(ci) {
   D.clubs[ci].roles.push({title:'New Role',period:''});
   renderClubRoles(ci);
 }
 function addClub() {
-  D.clubs.push({id:'c'+Date.now(),name:'New Club',roles:[{title:'Member',period:''}],description:'',images:[]});
+  D.clubs.unshift({id:'c'+Date.now(),name:'New CCA',roles:[{title:'Member',period:''}],description:'',images:[]});
   renderClubs();
-  toast('Club added');
+  expandCard('club-card-0');
+  toast('CCA added to top');
 }
 
 /* ─── ACHIEVEMENTS ─── */
@@ -511,13 +637,10 @@ function renderAchievements() {
   const el = document.getElementById('achievementCards');
   el.innerHTML = D.achievements.map((a,i) => `
     <div class="card" id="ach-card-${i}">
-      <div class="card-head" onclick="toggleCard('ach-card-${i}')">
-        <div class="card-head-left"><div class="card-head-num">${i+1}</div>${esc(a.title)}</div>
-        <span class="card-chevron">▼</span>
-      </div>
+      ${cardHead('ach-card-'+i, i, a.title, 'achievements', 'renderAchievements')}
       <div class="card-body">
         <div class="field-row-3">
-          <div class="field"><label>Title</label><input type="text" value="${esc(a.title)}" onchange="D.achievements[${i}].title=this.value;refreshCardHead('ach-card-${i}',${i},'ach')"/></div>
+          <div class="field"><label>Title</label><input type="text" value="${esc(a.title)}" onchange="D.achievements[${i}].title=this.value;renderAchievements();expandCard('ach-card-${i}')"/></div>
           <div class="field"><label>Date</label><input type="text" value="${esc(a.date)}" placeholder="Oct 2025" onchange="D.achievements[${i}].date=this.value"/></div>
         </div>
         <div class="field"><label>Description</label><textarea onchange="D.achievements[${i}].description=this.value">${esc(a.description)}</textarea></div>
@@ -527,36 +650,33 @@ function renderAchievements() {
     </div>`).join('');
 }
 function addAchievement() {
-  D.achievements.push({id:'a'+Date.now(),title:'New Achievement',date:'',description:'',link:''});
+  D.achievements.unshift({id:'a'+Date.now(),title:'New Achievement',date:'',description:'',link:''});
   renderAchievements();
-  toast('Achievement added');
+  expandCard('ach-card-0');
+  toast('Achievement added to top');
 }
 
 /* ─── HELPERS ─── */
 function esc(s=''){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function toggleCard(id) {
-  const c = document.getElementById(id);
-  c.classList.toggle('expanded');
-}
-function refreshCardHead(cardId, idx, type) {
-  const titleEl = document.querySelector(`#${cardId} .card-head-left`);
-  if (!titleEl) return;
-  let title = '';
-  if (type==='proj') title = D.projects[idx]?.title || '';
-  if (type==='club') title = D.clubs[idx]?.name || '';
-  if (type==='ach') title = D.achievements[idx]?.title || '';
-  titleEl.innerHTML = `<div class="card-head-num">${idx+1}</div>${esc(title)}`;
-}
+function toggleCard(id) { document.getElementById(id).classList.toggle('expanded'); }
+function expandCard(id) { const c = document.getElementById(id); if (c) c.classList.add('expanded'); }
 
 /* ─── COLLECT & EXPORT ─── */
 function collect() {
   D.hero.name = document.getElementById('heroName').value;
   D.hero.year = document.getElementById('heroYear').value;
+  D.hero.eyebrow = document.getElementById('heroEyebrow').value;
+  D.hero.headline = document.getElementById('heroHeadline').value;
+  D.hero.subline = document.getElementById('heroSubline').value;
   D.about.status = document.getElementById('aboutStatus').value;
   D.about.education = document.getElementById('aboutEdu').value;
   D.about.award = document.getElementById('aboutAward').value;
-  // interests collected live via renderInterests / tag editor
   D.about.bio = document.getElementById('aboutBio').value;
+  D.contact.heading = document.getElementById('contactHeading').value;
+  D.contact.blurb = document.getElementById('contactBlurb').value;
+  D.contact.email = document.getElementById('contactEmail').value;
+  D.contact.linkedin = document.getElementById('contactLinkedin').value;
+  D.contact.github = document.getElementById('contactGithub').value;
 }
 
 function saveAndExport() {
@@ -570,8 +690,8 @@ function saveAndExport() {
 
   const btn = document.getElementById('saveBtn');
   btn.classList.add('saved');
-  btn.innerHTML = '✓ Exported!';
-  setTimeout(() => { btn.classList.remove('saved'); btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M2 1h9l3 3v11H2V1zm5 9a2 2 0 100-4 2 2 0 000 4zm3-9H5v4h5V1z"/></svg> Save &amp; Export JSON'; }, 2500);
+  btn.textContent = '✓ Exported!';
+  setTimeout(() => { btn.classList.remove('saved'); btn.innerHTML = 'Save &amp; Export JSON'; }, 2500);
   toast('data.json downloaded — commit it to GitHub!', true);
 }
 
@@ -580,10 +700,6 @@ function toast(msg, green=false) {
   t.textContent = msg;
   t.className = 'toast show' + (green?' green':'');
   setTimeout(() => t.className='toast', 3500);
-}
-
-function getDefaultData() {
-  return {hero:{name:'',year:'2025',pills:[]},about:{status:'',education:'',award:'',interests:[],bio:''},projects:[],techStack:[],clubs:[],achievements:[]};
 }
 </script>
 </body>

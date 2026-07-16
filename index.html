@@ -17,9 +17,25 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--i);font-weight:300;overflow-x:hidden;cursor:none}
 
 /* CURSOR */
-.cursor{position:fixed;width:8px;height:8px;background:var(--text);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s ease}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(10,10,10,.2);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-@media(hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none!important}body{cursor:auto}}
+.cursor{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--text);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .25s ease,height .25s ease,opacity .2s ease,background .25s ease}
+.cursor-label{font-family:var(--i);font-size:.55rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#fff;opacity:0;transition:opacity .15s ease;white-space:nowrap}
+.cursor-ring{position:fixed;top:0;left:0;width:32px;height:32px;border:1px solid rgba(10,10,10,.2);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:opacity .2s ease}
+/* state: hovering a link / button — expand */
+.cursor.is-link{width:26px;height:26px}
+/* state: hovering a clickable case study — expand + VIEW */
+.cursor.is-view{width:76px;height:76px;background:var(--text)}
+.cursor.is-view .cursor-label{opacity:1}
+/* state: hovering imagery — invert */
+.cursor.is-invert{width:56px;height:56px;background:#fff;mix-blend-mode:difference}
+/* state: hovering text — disappear */
+.cursor.is-text{opacity:0;width:4px;height:4px}
+.cursor.is-view~.cursor-ring,.cursor.is-invert~.cursor-ring,.cursor.is-text~.cursor-ring{opacity:0}
+.cursor.is-link~.cursor-ring{opacity:.35}
+/* native text caret shows where the custom cursor disappears */
+p,h1,h2,h3,h4,h5,h6,li,blockquote{cursor:text}
+.cs-card[data-href],.cs-card[data-href] *{cursor:none}
+a,button,a *,button *{cursor:none}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none!important}body{cursor:auto}a,button,a *,button *{cursor:pointer}}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3.5rem;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
@@ -31,7 +47,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:cen
 /* HERO */
 #home{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:9rem 3.5rem 3.5rem;border-bottom:1px solid var(--border)}
 .hero-eyebrow{font-family:var(--i);font-size:.7rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
-.hero-name{font-family:var(--u);font-size:clamp(3rem,9.5vw,10rem);font-weight:300;line-height:.95;letter-spacing:-.03em;color:var(--text)}
+.hero-headline{font-family:var(--u);font-size:clamp(2rem,6.4vw,6.2rem);font-weight:300;line-height:1.08;letter-spacing:-.03em;color:var(--text);max-width:16ch}
+.hero-subline{font-family:var(--i);font-size:clamp(.9rem,1.5vw,1.1rem);line-height:1.8;color:#555;font-weight:300;max-width:52ch;margin-top:2.2rem}
 .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1.5rem;margin-top:3rem}
 .hero-pills{display:flex;flex-wrap:wrap;gap:.5rem}
 .hero-pill{font-family:var(--i);font-size:.7rem;font-weight:400;color:var(--muted);border:1px solid var(--border);border-radius:2rem;padding:.4rem .9rem}
@@ -45,6 +62,52 @@ section{padding:7rem 3.5rem;border-top:1px solid var(--border)}
 .section-num{font-family:var(--i);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:.3rem}
 h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-weight:300;letter-spacing:-.025em;line-height:1.1;text-align:right}
 
+/* CASE STUDIES */
+.cs-stack{display:flex;flex-direction:column;gap:3rem}
+.cs-card{border:1px solid var(--border);border-radius:4px;background:#fff;overflow:hidden;transition:box-shadow .3s ease,transform .3s ease}
+.cs-card[data-href]:hover{box-shadow:0 18px 50px -24px rgba(0,0,0,.25);transform:translateY(-3px)}
+.cs-top{padding:2.6rem 2.6rem 0;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
+.cs-meta{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.4rem}
+.cs-num{font-family:var(--u);font-size:.7rem;font-weight:400;color:var(--muted);letter-spacing:.1em}
+.cs-tag{font-family:var(--i);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cs-year{font-family:var(--i);font-size:.7rem;color:var(--muted);text-align:right;padding-top:.2rem;white-space:nowrap}
+.cs-title{font-family:var(--u);font-size:clamp(1.3rem,3.2vw,2.4rem);font-weight:300;letter-spacing:-.02em;line-height:1.15;margin-bottom:1.4rem}
+.cs-summary{font-family:var(--i);font-size:.88rem;line-height:1.85;color:#555;font-weight:300;max-width:62ch}
+.cs-outcome{font-family:var(--i);font-size:.82rem;line-height:1.7;color:var(--text);font-weight:400;max-width:62ch;margin-top:1.1rem;padding-left:1rem;border-left:2px solid var(--text)}
+.cs-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.8rem}
+.cs-chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.cs-chip{font-family:var(--i);font-size:.66rem;color:var(--muted);border:1px solid var(--border);border-radius:2rem;padding:.32rem .75rem}
+.cs-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--i);font-size:.72rem;font-weight:500;color:var(--text);text-decoration:none;border:1px solid var(--border);border-radius:2rem;padding:.45rem 1rem;transition:background .2s,border-color .2s,color .2s;white-space:nowrap}
+.cs-link:hover{background:var(--text);color:#fff;border-color:var(--text)}
+/* media strip: image + video cards */
+.cs-media{display:flex;gap:1rem;overflow-x:auto;padding:2.2rem 2.6rem 2.6rem;scrollbar-width:thin}
+.cs-media-card{flex:0 0 auto;width:min(430px,72vw);border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--faint)}
+.cs-media-card img,.cs-media-card video,.cs-media-card iframe{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;border:none;background:#000}
+.cs-media-cap{display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--i);font-size:.66rem;color:var(--muted);padding:.6rem .85rem;background:#fff;border-top:1px solid var(--border)}
+.cs-media-type{letter-spacing:.12em;text-transform:uppercase;font-size:.58rem;flex-shrink:0}
+.cs-placeholder{flex:0 0 auto;width:min(430px,72vw);aspect-ratio:16/10;border:1px solid var(--border);border-radius:4px;background:var(--faint);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem}
+.cs-placeholder span{font-family:var(--u);font-size:3.4rem;font-weight:300;color:#ddd;letter-spacing:-.03em}
+.cs-placeholder small{font-family:var(--i);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#ccc}
+
+/* ARCHIVE */
+.archive-label{font-family:var(--i);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:4.5rem 0 1.5rem}
+.archive-row{display:grid;grid-template-columns:1fr auto auto;align-items:baseline;gap:2rem;padding:1.3rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:inherit}
+.archive-row:first-of-type{border-top:1px solid var(--border)}
+.archive-title{font-family:var(--u);font-size:clamp(.76rem,1.6vw,.95rem);font-weight:300}
+.archive-desc{font-family:var(--i);font-size:.74rem;line-height:1.7;color:#888;font-weight:300;max-width:70ch;grid-column:1/-1;margin-top:.35rem}
+.archive-year{font-family:var(--i);font-size:.7rem;color:var(--muted)}
+.archive-arrow{font-size:.8rem;color:var(--muted);transition:transform .25s,color .2s}
+a.archive-row:hover .archive-arrow{transform:translate(3px,-3px);color:var(--text)}
+
+/* CAPABILITIES */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.cap-group{padding:2.4rem 2.2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);margin-right:-1px;margin-bottom:-1px;background:#fff}
+.cap-index{font-family:var(--i);font-size:.62rem;letter-spacing:.14em;color:var(--muted);margin-bottom:1.2rem}
+.cap-name{font-family:var(--u);font-size:.92rem;font-weight:400;letter-spacing:-.01em;margin-bottom:1.4rem;line-height:1.35}
+.cap-items{list-style:none}
+.cap-items li{font-family:var(--i);font-size:.78rem;line-height:1.7;color:#555;font-weight:300;padding:.5rem 0;border-bottom:1px solid var(--faint)}
+.cap-items li:last-child{border-bottom:none}
+
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:260px 1fr;gap:6rem;align-items:start}
 .about-meta{display:flex;flex-direction:column}
@@ -54,42 +117,29 @@ h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-we
 .about-meta-item span{font-family:var(--i);font-size:.82rem;line-height:1.5}
 .about-body{font-family:var(--i);font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.9;color:#444;font-weight:300}
 
-/* LIST ROWS */
+/* LIST ROWS (achievements) */
 .list-table{display:flex;flex-direction:column}
-.list-row{border-bottom:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden}
+.list-row{border-bottom:1px solid var(--border);position:relative;overflow:hidden}
 .list-row:first-child{border-top:1px solid var(--border)}
 .list-row-header{display:grid;grid-template-columns:1fr 100px 28px;align-items:center;gap:2rem;padding:1.6rem 0;position:relative;z-index:1}
-
-.row-title{font-family:var(--u);font-size:clamp(.78rem,1.8vw,1.05rem);font-weight:300;letter-spacing:-.01em;position:relative;z-index:1}
-.row-meta{font-family:var(--i);font-size:.7rem;color:var(--muted);position:relative;z-index:1}
-.row-toggle{font-size:.85rem;color:var(--muted);position:relative;z-index:1;transition:transform .3s,color .2s;line-height:1;user-select:none}
+.row-title{font-family:var(--u);font-size:clamp(.78rem,1.8vw,1.05rem);font-weight:300;letter-spacing:-.01em}
+.row-meta{font-family:var(--i);font-size:.7rem;color:var(--muted)}
+.row-toggle{font-size:.85rem;color:var(--muted);transition:transform .3s,color .2s;line-height:1;user-select:none}
 .list-row:hover .row-toggle{color:var(--text)}
 .list-row.open .row-toggle{transform:rotate(45deg);color:var(--text)}
-
-/* EXPAND PANEL */
 .list-expand{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.4,0,0.2,1)}
 .list-expand-inner{padding:0 0 1.8rem;display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap}
 .expand-desc{font-family:var(--i);font-size:.85rem;line-height:1.8;color:#555;font-weight:300;flex:1;min-width:240px}
 .expand-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--i);font-size:.72rem;font-weight:500;color:var(--text);text-decoration:none;border:1px solid var(--border);border-radius:2rem;padding:.45rem 1rem;transition:background .2s,border-color .2s;white-space:nowrap;align-self:flex-start;margin-top:.25rem}
 .expand-link:hover{background:var(--text);color:#fff;border-color:var(--text)}
 
-/* TECH STACK */
-.stack-wrap{padding:3rem 0;border-top:1px solid var(--border);overflow:hidden}
-.stack-label{font-family:var(--i);font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2rem}
-.marquee-inner{display:flex;gap:4rem;align-items:center;width:max-content;animation:marquee 26s linear infinite}
-.marquee-inner img{width:46px;height:46px;object-fit:contain;filter:grayscale(1) opacity(.35);transition:filter .25s,transform .25s;flex-shrink:0}
-.marquee-inner img:hover{filter:grayscale(0) opacity(1);transform:scale(1.15)}
-.marquee-outer{overflow:hidden;width:100%}
-@media(hover:none),(pointer:coarse){.marquee-inner{animation-duration:30s}}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* CLUBS */
 .clubs-stack{display:flex;flex-direction:column}
 .club-block{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0;border-bottom:1px solid var(--border)}
 .club-block:first-child{border-top:1px solid var(--border)}
 .carousel{overflow:hidden;border-radius:3px;aspect-ratio:3/2;background:var(--faint)}
-.carousel-slides{display:flex;transition:transform .55s cubic-bezier(0.4,0,0.2,1)}
-.carousel-slides img{width:100%;flex-shrink:0;height:100%;object-fit:cover}
+.carousel-slides{display:flex;transition:transform .55s cubic-bezier(0.4,0,0.2,1);height:100%}
+.carousel-slides img,.carousel-slides video{width:100%;flex-shrink:0;height:100%;object-fit:cover}
 .carousel-dots{display:flex;gap:.4rem;margin-top:.8rem}
 .carousel-dot{width:16px;height:2px;background:var(--border);border:none;cursor:pointer;border-radius:2px;transition:background .2s,width .25s}
 .carousel-dot.active{background:var(--text);width:28px}
@@ -99,7 +149,20 @@ h2.section-title{font-family:var(--u);font-size:clamp(1.6rem,4vw,3.5rem);font-we
 .club-role:first-child{border-top:1px solid var(--border)}
 .club-role-title{font-family:var(--i);font-size:.78rem;font-weight:500}
 .club-role-period{font-family:var(--i);font-size:.7rem;color:var(--muted)}
-.club-desc{font-family:var(--i);font-size:.82rem;line-height:1.85;color:#555;font-weight:300}
+.club-desc{font-family:var(--i);font-size:.82rem;line-height:1.85;color:#555;font-weight:300;white-space:pre-line}
+
+/* CONTACT */
+#contact{min-height:85vh;display:flex;flex-direction:column;justify-content:center}
+.contact-heading{font-family:var(--u);font-size:clamp(2rem,7vw,6.5rem);font-weight:300;letter-spacing:-.03em;line-height:1.05;margin-bottom:2rem}
+.contact-blurb{font-family:var(--i);font-size:clamp(.88rem,1.5vw,1.05rem);line-height:1.85;color:#555;font-weight:300;max-width:54ch;margin-bottom:4rem}
+.contact-rows{display:flex;flex-direction:column}
+.contact-row{display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:2rem;padding:1.7rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:padding-left .25s ease}
+.contact-row:first-child{border-top:1px solid var(--border)}
+.contact-row:hover{padding-left:.8rem}
+.contact-row-label{font-family:var(--i);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.contact-row-value{font-family:var(--u);font-size:clamp(.8rem,2vw,1.15rem);font-weight:300;letter-spacing:-.01em;word-break:break-all}
+.contact-row-arrow{font-size:1rem;color:var(--muted);transition:transform .25s,color .2s}
+.contact-row:hover .contact-row-arrow{transform:translate(4px,-4px);color:var(--text)}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
@@ -128,6 +191,13 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
   .club-block{grid-template-columns:1fr;gap:2rem}
   .list-row-header{grid-template-columns:1fr 28px}
   .row-meta{display:none}
+  .cs-top{grid-template-columns:1fr;padding:1.6rem 1.6rem 0}
+  .cs-year{text-align:left}
+  .cs-media{padding:1.6rem}
+  .archive-row{grid-template-columns:1fr auto}
+  .archive-arrow{display:none}
+  .contact-row{grid-template-columns:1fr auto}
+  .contact-row-label{display:none}
   footer{flex-direction:column;align-items:flex-start}
   h2.section-title{text-align:left}
 }
@@ -139,18 +209,20 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
   <div class="loading-dot"></div>
 </div>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor" id="cursor" style="visibility:hidden"><span class="cursor-label">View</span></div>
+<div class="cursor-ring" id="cursorRing" style="visibility:hidden"></div>
 
-<!-- NAV (populated by JS) -->
+<!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo" id="navLogo"></a>
   <div class="nav-links">
     <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#capabilities">Capabilities</a>
     <a href="#aboutme">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#clubs">Clubs</a>
-    <a href="#achievements">Achievements</a>
+    <a href="#clubs">CCAs</a>
+    <a href="#achievements">Awards</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -158,18 +230,39 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
 <section id="home" style="border:none">
   <div>
     <p class="hero-eyebrow reveal" id="heroEyebrow"></p>
-    <h1 class="hero-name reveal d1" id="heroName"></h1>
+    <h1 class="hero-headline reveal d1" id="heroHeadline"></h1>
+    <p class="hero-subline reveal d2" id="heroSubline"></p>
   </div>
-  <div class="hero-bottom reveal d2">
+  <div class="hero-bottom reveal d3">
     <div class="hero-pills" id="heroPills"></div>
     <div class="hero-scroll"><div class="hero-scroll-line"></div>Scroll</div>
   </div>
 </section>
 
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="section-header reveal">
+    <span class="section-num">01 — Selected Work</span>
+    <h2 class="section-title">Case<br>studies.</h2>
+  </div>
+  <div class="cs-stack" id="caseStudies"></div>
+  <p class="archive-label reveal" id="archiveLabel">More projects</p>
+  <div id="archiveList"></div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-header reveal">
+    <span class="section-num">02 — Capabilities</span>
+    <h2 class="section-title">What I<br>work with.</h2>
+  </div>
+  <div class="cap-grid reveal d1" id="capGrid"></div>
+</section>
+
 <!-- ABOUT -->
 <section id="aboutme">
   <div class="section-header reveal">
-    <span class="section-num">01 — About Me</span>
+    <span class="section-num">03 — About Me</span>
     <h2 class="section-title">A little<br>about me.</h2>
   </div>
   <div class="about-grid">
@@ -178,25 +271,10 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header reveal">
-    <span class="section-num">02 — Projects</span>
-    <h2 class="section-title">Selected<br>work.</h2>
-  </div>
-  <div class="list-table" id="projectsList"></div>
-</section>
-
-<!-- TECH STACK -->
-<div class="stack-wrap">
-  <p class="stack-label">Tech Stack</p>
-  <div class="marquee-outer"><div class="marquee-inner" id="marqueeInner"></div></div>
-</div>
-
-<!-- CLUBS -->
+<!-- CLUBS / CCAs -->
 <section id="clubs">
   <div class="section-header reveal">
-    <span class="section-num">03 — Clubs &amp; Societies</span>
+    <span class="section-num">04 — CCAs &amp; Societies</span>
     <h2 class="section-title">Leadership &amp;<br>community.</h2>
   </div>
   <div class="clubs-stack" id="clubsStack"></div>
@@ -205,103 +283,190 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3.5rem;display:flex;ali
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
   <div class="section-header reveal">
-    <span class="section-num">04 — Achievements</span>
+    <span class="section-num">05 — Achievements</span>
     <h2 class="section-title">Recognition.</h2>
   </div>
   <div class="list-table" id="achievementsList"></div>
 </section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">06 — Contact</span>
+  </div>
+  <h2 class="contact-heading reveal" id="contactHeading"></h2>
+  <p class="contact-blurb reveal d1" id="contactBlurb"></p>
+  <div class="contact-rows reveal d2" id="contactRows"></div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <span class="footer-brand" id="footerBrand"></span>
-  <div class="footer-links">
-    <a href="#home">Top</a><a href="#projects">Projects</a><a href="#achievements">Awards</a>
+  <div class="footer-links" id="footerLinks">
+    <a href="#home">Top</a><a href="#work">Work</a><a href="#contact">Contact</a>
   </div>
   <span class="footer-copy" id="footerCopy"></span>
 </footer>
 
 <script>
 /* ── INLINE DATA (fallback for local file:// opening) ── */
-const INLINE_DATA = {"hero":{"name":"Reyes Tham","year":"2025","pills":["Computer Engineering Graduate","NUS Computer Science 2026","NSF @ HQ RSAF","ST Engineering Prize"]},"about":{"status":"NSF @ HQ RSAF","education":"NUS Computer Science, 2026","award":"ST Engineering Prize","interests":["Software Engineering","Finance","Stock Trading","Travel","Fitness"],"bio":"I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."},"projects":[{"id":"p1","title":"Automated Projected Appointment","year":"2026","description":"An automated system for projecting and managing appointments, streamlining scheduling workflows.","link":""},{"id":"p2","title":"Automated CV Display System","year":"2025","description":"A dynamic CV display system that automatically formats and presents resume content.","link":""},{"id":"p3","title":"Data Sorting Application","year":"2024","description":"An application for sorting and organizing large datasets efficiently.","link":""},{"id":"p4","title":"Fruit Image Classifier","year":"2023","description":"A machine learning model trained to classify fruit images using convolutional neural networks.","link":""},{"id":"p5","title":"Library Inventory System","year":"2023","description":"A full-stack inventory management system for tracking library books and resources.","link":""},{"id":"p6","title":"Medicine Dispenser Project","year":"2023","description":"An IoT-enabled medicine dispenser that automates medication scheduling and dispensing.","link":""},{"id":"p7","title":"Virtual Marketplace","year":"2023","description":"A peer-to-peer virtual marketplace platform for buying and selling goods online.","link":""},{"id":"p8","title":"Mental Health Support Mobile App","year":"2023","description":"A mobile application providing mental health resources, mood tracking, and peer support features.","link":""}],"techStack":[{"name":"Tech","image":"https://framerusercontent.com/images/yI1YZeklbQLqDXIQcSpDujw6LQ.png?width=500"},{"name":"Tech","image":"https://framerusercontent.com/images/5wIXfNf0nWJfmJRJ2VWGMdFqV8.webp?width=256"},{"name":"Tech","image":"https://framerusercontent.com/images/HODfGABGNXj8Ca1nKow1wvD6ck.png?width=1280"},{"name":"Tech","image":"https://framerusercontent.com/images/9P3Br5ZmhomsFgEK6Lb4igyFbuw.png?width=960"},{"name":"Tech","image":"https://framerusercontent.com/images/9njUwDm7fwBXAsOJ7D4aerSfk.png?width=960"},{"name":"Tech","image":"https://framerusercontent.com/images/UdhL0urstLI2W3Jn6tmh9xqOBA.png?width=2400"},{"name":"Tech","image":"https://framerusercontent.com/images/3wIJv2SqSuvNhnk9dNjwHylMHk.png?width=500"},{"name":"Tech","image":"https://framerusercontent.com/images/3YI5ZMJHWykL7CJilFWl7N7Y.svg?width=2500"},{"name":"Tech","image":"https://framerusercontent.com/images/1Ha02vDmzNorrQ0yI6Q0Kw94AcM.svg?width=800"}],"clubs":[{"id":"c1","name":"SP Canoe Polo","roles":[{"title":"President","period":"Apr 23 – Apr 24"},{"title":"Vice-President","period":"Apr 22 – Apr 23"}],"description":"I spent two years in the SP Canoe Polo Executive Committee balancing high-level leadership with the physical grind of the sport. As President and Vice President, I helped the club achieve an Excellence Award in 2022 by setting ambitious SMART goals and overhauling recruitment. On the water, I competed in multiple university-level tournaments, secured two medals, and earned the honor of representing Singapore on the Under-21 National Team.","images":["https://framerusercontent.com/images/M5WhSbI8sWSkJmqmxyocyCbktCA.jpeg?width=1601","https://framerusercontent.com/images/DLyQwpYFJ7wKMum8v5MFjjYHJ4.jpeg?width=1600","https://framerusercontent.com/images/n27pVqbKAMXkqduKAOBolcLlb4.jpeg?width=1600"]},{"id":"c2","name":"HQ RSAF NSF Council","roles":[{"title":"President","period":"Dec 25 – Present"},{"title":"Vice-President","period":"Jul 25 – Dec 25"},{"title":"Events Head","period":"Dec 24 – Jul 25"}],"description":"I serve as a leader in the HQ RSAF NSF Council, making the NS journey more engaging and meaningful for my fellow airmen. My role involves mentoring the EXCO team, working closely with senior RSAF leadership to represent NSF perspectives, and coordinating large-scale learning visits to the Singapore Navy Museum, Indian Heritage Centre, and Singapore City Gallery.","images":["https://framerusercontent.com/images/euwHlSXktv0nMpPHhoV5IzlfdzU.jpeg?width=2048","https://framerusercontent.com/images/DtUnJxVbw23agLRvEkmsRz8ZYSY.jpeg?width=1600","https://framerusercontent.com/images/z5qdEX9hkg0oaJ1HUnulZAIOTos.jpeg?width=2048"]},{"id":"c3","name":"EEE Club","roles":[{"title":"Welfare Subcommittee","period":"Jul 21 – Apr 24"}],"description":"My leadership journey started early within the SP Electrical & Electronic Engineering Club's Welfare Committee. During COVID-19, I focused on maintaining student morale by coordinating exam welfare pack distribution. I also served as a Group Leader for student camps, finding creative ways to mentor new students and ensure they felt welcomed into the SP community.","images":["https://framerusercontent.com/images/JI14UYX8sqf64X12QUDb8T16Q.jpeg?width=2048","https://framerusercontent.com/images/wVw0enTIb2EYL1Szue2d3dDCI.jpeg?width=1600","https://framerusercontent.com/images/LQOxFHgtJwYuKittBvMwA2fRM6I.jpeg?width=2048"]}],"achievements":[{"id":"a1","title":"Best Airman of the Month","date":"Oct 2025","description":"Awarded Best Airman of the Month at HQ RSAF for outstanding performance and leadership.","link":""},{"id":"a2","title":"ST Engineering Prize","date":"Apr 2024","description":"Awarded the ST Engineering Prize for academic excellence in Engineering.","link":""},{"id":"a3","title":"Edusave Academic Award 2024","date":"Apr 2024","description":"Edusave Academic Award recognising outstanding academic performance.","link":""},{"id":"a4","title":"Edusave Academic Award 2023","date":"Sep 2023","description":"Edusave Academic Award recognising outstanding academic performance.","link":""},{"id":"a5","title":"Director's Honor Roll","date":"Jul 2023","description":"Named to the Director's Honor Roll for exceptional academic achievement.","link":""},{"id":"a6","title":"National Canoe Polo Champion","date":"Jul 2023","description":"Won the National Canoe Polo Championship representing Singapore.","link":""},{"id":"a7","title":"NTU Canoe Polo Champion","date":"Jan 2023","description":"Won the NTU Canoe Polo Championship.","link":""},{"id":"a8","title":"Edusave Academic Award 2022","date":"Sep 2022","description":"Edusave Academic Award recognising outstanding academic performance.","link":""}]};
+const INLINE_DATA = {"hero":{"name":"Reyes Tham","year":"2026","eyebrow":"Reyes Tham — Portfolio 2026","headline":"I build AI agents & automation that make slow work fast.","subline":"Computer Engineering graduate, NUS Computer Science from 2026. Currently NSF at HQ RSAF — shipping tools that save people hours every week.","pills":["AI Agents & LLM Tooling","Workflow Automation","Full-Stack & Mobile","ML & Data Systems"]},"about":{"status":"NSF @ HQ RSAF","education":"NUS Computer Science, 2026","award":"ST Engineering Prize","interests":["Software Engineering","Finance","Stock Trading","Travel","Fitness"],"bio":"I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."},"caseStudies":[{"id":"cs1","title":"Telegram AI Chat Bot","year":"2026","tag":"AI · Agents · Automation","summary":"A Python-based Telegram AI assistant with a modular multi-agent architecture — agents communicate with one another and form a small autonomous AI ecosystem. Scheduled prompting delivers automated daily briefings, real-time stock tracking surfaces the latest market news, and task automation workflows retrieve stock insights and job listings without being asked.","outcome":"A personal AI ecosystem that runs briefings, market tracking and job hunts on autopilot.","stack":["Python","Anthropic API","Finnhub","Yahoo Finance","Render"],"link":"https://github.com/Reyes-Tham/ReyesV2","media":[]},{"id":"cs2","title":"Data Sorting Application","year":"2024","tag":"Desktop · Data Tooling","summary":"A data sorting application built for mVizn Pte Ltd with built-in image editing tools, using Java and MySQL. Designed and implemented the core features for organizing large datasets efficiently while letting users edit and manage images directly on the Windows platform.","outcome":"Improved the company's data sorting efficiency by 40%.","stack":["Java","MySQL","Windows"],"link":"https://github.com/Reyes-Tham/Mvizn_datasort","media":[]},{"id":"cs3","title":"Library Inventory System","year":"2023","tag":"Full-Stack · Desktop","summary":"A Java desktop application using JavaFX and MySQL to manage library inventory, borrowing records and user accounts. Implemented OOP design patterns, fine calculation logic, search and filtering, admin dashboards and statistical reporting, with the JavaMail API triggering automated overdue notifications.","outcome":"Automated overdue notifications improved return compliance and operational efficiency.","stack":["Java","JavaFX","MySQL","JavaMail"],"link":"https://github.com/Reyes-Tham/LibrarianApp","media":[]}],"archive":[{"id":"p2","title":"Automated Projected Appointment","year":"2026","description":"Developed an automated template filler using Excel and VBA for projected RSAF officer appointments that helps visualize and define timetable boundaries, streamlining scheduling and improving planning efficiency.","link":""},{"id":"p3","title":"Automated CV Display System","year":"2025","description":"Developed a CV display system for RSAF HR department that allows viewing of crucial personnel information such as photo, rank, past appointments, age, and more using Excel and VBA automation, improving efficiency in managing records.","link":""},{"id":"p5","title":"Fruit Image Classifier","year":"2023","description":"Developed a machine learning image classification system using Python and TensorFlow to distinguish between bananas and oranges. Implemented a Convolutional Neural Network (CNN) with image preprocessing, model training, and evaluation to improve accuracy. Built an Android mobile application to integrate the trained model, allowing users to upload or capture images for real-time fruit classification.","link":"https://drive.google.com/drive/folders/1weofo0C78aML2x4Wn_Pfd6SRw7QQRwRo?usp=drive_link"},{"id":"p7","title":"Medicine Dispenser Project","year":"2023","description":"Led the development of a medicine dispenser utilizing the PIC18 microcontroller interfaced with motors, LCD, displays, keypads, and Bluetooth modules to assist elderly individuals with medication management.","link":"https://drive.google.com/drive/folders/1cdcTI9fdau6AkFIs-BmtNXdgnkw4WVEi?usp=drive_link"},{"id":"p8","title":"Virtual Marketplace","year":"2023","description":"Worked in a team to build an e-commerce web application from scratch using HTML, PHP, and AstraDB (NoSQL), designed as a virtual marketplace. I handled the UI/UX design and developed key features like user authentication, product listings, and a real-time chat system for buyer-seller communication. Used GitHub to manage branches and track different versions of the codebase, ensuring smooth collaboration and version control.","link":"https://drive.google.com/drive/folders/1fTh0MaJlMFKDgivGnIaQwoJllECBZf7N?usp=drive_link"},{"id":"p9","title":"Mental Health Support Mobile App","year":"2023","description":"Developed a mental health support mobile application using Android Studio with Java, integrating Firebase services for cloud database storage. Implemented features such as mood tracking, journaling, and secure data management to support daily mental wellness and habit monitoring.","link":"https://drive.google.com/drive/folders/1cqmbqLGfuBRIgfdemL4J1dihSl9KwKu5?usp=drive_link"}],"capabilities":[{"group":"AI & Machine Learning","items":["LLM agents & multi-agent systems (Anthropic API)","TensorFlow & convolutional neural networks","Prompt & workflow design","Model training, evaluation & mobile integration"]},{"group":"Automation & Systems","items":["Excel / VBA process automation","Scheduled tasks & data pipelines","IoT & embedded systems (PIC18, Bluetooth)","Cloud deployment (Render, GitHub Pages)"]},{"group":"Full-Stack & Mobile","items":["Java · JavaFX desktop applications","Android apps (Java, Firebase)","HTML / CSS / JavaScript · PHP","REST APIs & real-time chat"]},{"group":"Data & Storage","items":["MySQL · Firebase · AstraDB (NoSQL)","Data sorting & reporting tools","Financial & market data APIs","Git & GitHub version control"]}],"clubs":[{"id":"c1","name":"SP Canoe Polo","roles":[{"title":"President","period":"Apr 23 – Apr 24"},{"title":"Vice-President","period":"Apr 22 – Apr 23"}],"description":"I spent my two years in the Singapore Polytechnic (SP) Canoe Polo Executive Committee balancing the demands of high-level leadership with the physical grind of the sport. As President and Vice President, I helped the club achieve an Excellence Award in 2022 by setting ambitious SMART goals and overhauling our recruitment. On the water, I pushed myself just as hard, competing in multiple university-level tournaments where I secured two medals and eventually earned the honor of representing Singapore on the Under-21 National Team.\n\nOne of my biggest challenges was stepping up as the Organizing Chairman for the SP Canoe Polo Opens Championship. I was responsible for the entire timeline, managing a team that handled everything from logistics and sponsorship to the refereeing panel. I also made it a point to share the technical side of the sport through boat repair workshops and led 'Sports for Life' sessions to encourage fitness across the campus.  \n\nBeyond the competition and the gear, I wanted our club to make a real impact. I collaborated with external partners to host a community service event for injured migrant workers, giving them a guided tour of Gardens by the Bay. Whether I was representing the country or managing a committee, my goal was to leave the club with a stronger legacy and a deeper connection to the community.","images":["https://framerusercontent.com/images/M5WhSbI8sWSkJmqmxyocyCbktCA.jpeg?width=1601","https://framerusercontent.com/images/DLyQwpYFJ7wKMum8v5MFjjYHJ4.jpeg?width=1600","https://framerusercontent.com/images/n27pVqbKAMXkqduKAOBolcLlb4.jpeg?width=1600"]},{"id":"c2","name":"HQ RSAF NSF Council","roles":[{"title":"President","period":"Dec 25 – Present"},{"title":"Vice-President","period":"Jul 25 – Dec 25"},{"title":"Events Head","period":"Dec 24 – Jul 25"}],"description":"I currently serve as a leader in the Headerquarters Republic Of Singapore Airforce (HQ RSAF) NSF Council, where my main goal is to make the NS journey more engaging and meaningful for my fellow airmen. A big part of my role involves mentoring my EXCO team and handling our internal operations, while also working closely with senior leadership in the Republic of Singapore Air Force to represent NSF perspectives and bridge the gap between ground experiences and HQ decisions. From welcoming new batches of recruits during induction talks to planning our yearly direction, I'm motivated by the idea of building a stronger and more connected NSF community. \n\nAs the Event Head, I focus on creating activities that are both enjoyable and meaningful. I've coordinated large-scale learning visits to places like the Singapore Navy Museum, the Indian Heritage Centre, and the Singapore City Gallery. I handled everything from logistics and transport planning to the overall program flow. Beyond just organizing outings, these experiences were designed to help NSFs better appreciate our national identity and understand the wider defence ecosystem. By balancing advocacy work with hands-on event execution, I aim to make sure every NSF feels welcomed, supported, and valued from the very start of their journey.","images":["https://framerusercontent.com/images/euwHlSXktv0nMpPHhoV5IzlfdzU.jpeg?width=2048","https://framerusercontent.com/images/DtUnJxVbw23agLRvEkmsRz8ZYSY.jpeg?width=1600","https://framerusercontent.com/images/z5qdEX9hkg0oaJ1HUnulZAIOTos.jpeg?width=2048"]},{"id":"c3","name":"EEE Club","roles":[{"title":"Welfare Subcommittee","period":"Jul 21 – Apr 24"}],"description":"My involvement in leadership started early at Singapore Polytechnic (SP) within the Electrical & Electronic Engineering (EEE) Club, where I served on the Welfare Committee. During the height of the COVID-19 pandemic, I focused on maintaining student morale by coordinating the distribution of exam welfare packs to help my peers through a stressful academic season. I also stepped up as a Group Leader for our student camps, which was a unique challenge during that period. I had to find creative ways to mentor and engage a fresh batch of students, ensuring they felt welcomed into the SP community despite the social distancing hurdles and the shift to a hybrid campus life.","images":["https://framerusercontent.com/images/JI14UYX8sqf64X12QUDb8T16Q.jpeg?width=2048","https://framerusercontent.com/images/wVw0enTIb2EYL1Szue2d3dDCI.jpeg?width=1600","https://framerusercontent.com/images/LQOxFHgtJwYuKittBvMwA2fRM6I.jpeg?width=2048"]}],"achievements":[{"id":"a1","title":"Best Airman of the Month","date":"Oct 2025","description":"Awarded Best Airman of the Month at HQ RSAF for outstanding performance and leadership.","link":""},{"id":"a2","title":"ST Engineering Prize","date":"Apr 2024","description":"Awarded upon graduating from Singapore Polytechnic, the ST Engineering Prize is given to top students who have demonstrated exceptional academic performance and potential.","link":""},{"id":"a3","title":"Edusave Academic Award 2024","date":"Apr 2024","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""},{"id":"a4","title":"Edusave Academic Award 2023","date":"Sep 2023","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""},{"id":"a5","title":"Director's Honor Roll (AY2022/2023)","date":"Jul 2023","description":"Named to the Director's Honor Roll for exceptional academic achievement.","link":""},{"id":"a6","title":"National Canoe Polo Championship 2023","date":"Jul 2023","description":"Achieved Second runner up","link":""},{"id":"a7","title":"NTU Canoe Polo Championship 2023","date":"Jan 2023","description":"Achieved First runner up","link":""},{"id":"a8","title":"Edusave Academic Award 2022","date":"Sep 2022","description":"Awarded to students who are within the top 25% of their school's level and course in terms of academic performance, have demonstrated good conduct","link":""}],"contact":{"heading":"Let's build something.","blurb":"I'm open to software engineering internships, collaborations, and good conversations about AI, automation and finance. The fastest way to reach me is email or LinkedIn.","email":"rtmf1211@gmail.com","linkedin":"https://www.linkedin.com/in/reyes-tham","github":"https://github.com/Reyes-Tham"}};
 
 /* ── LOAD DATA ── */
 /* Tries to fetch data.json (works on GitHub Pages / any server).
    Falls back to INLINE_DATA when opened as a local file. */
 async function loadData() {
+  let d;
   try {
     const res = await fetch('data.json?v=' + Date.now());
     if (!res.ok) throw new Error('not ok');
-    return await res.json();
+    d = await res.json();
   } catch(e) {
-    // Running locally (file://) or data.json missing — use embedded data
-    return INLINE_DATA;
+    d = INLINE_DATA;
   }
+  return migrate(d);
 }
+
+/* Accepts the old schema (projects/techStack) and upgrades it in memory */
+function migrate(d) {
+  if (!d) return d;
+  if (!d.caseStudies && Array.isArray(d.projects)) {
+    d.caseStudies = d.projects.slice(0, 3).map(p => ({
+      ...p, tag: '', summary: p.description || '', outcome: '', stack: [], media: []
+    }));
+    d.archive = d.projects.slice(3);
+  }
+  d.caseStudies = (d.caseStudies || []).map(c => ({ media: [], stack: [], ...c }));
+  d.archive = d.archive || [];
+  d.capabilities = d.capabilities || [];
+  d.contact = d.contact || { heading: "Let's talk.", blurb: '', email: '', linkedin: '', github: '' };
+  d.hero.headline = d.hero.headline || d.hero.name;
+  d.hero.eyebrow = d.hero.eyebrow || `${d.hero.name} — Portfolio ${d.hero.year}`;
+  d.hero.subline = d.hero.subline || '';
+  return d;
+}
+
+/* ── HELPERS ── */
+function esc(s=''){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function isEmbed(src){return /youtube\.com|youtu\.be|vimeo\.com/.test(src)}
+function embedUrl(src){
+  let m = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
+  if (m) return `https://www.youtube.com/embed/${m[1]}`;
+  m = src.match(/vimeo\.com\/(\d+)/);
+  if (m) return `https://player.vimeo.com/video/${m[1]}`;
+  return src;
+}
+function isVideoSrc(src){return src.startsWith('data:video') || /\.(mp4|webm|mov|m4v)(\?|$)/i.test(src)}
 
 /* ── RENDER ── */
 function render(d) {
-  // Hero
-  document.getElementById('heroEyebrow').textContent = `Portfolio — ${d.hero.year}`;
-  const nameParts = d.hero.name.split(' ');
-  document.getElementById('heroName').innerHTML = nameParts.join('<br>');
-  // nav logo intentionally left empty
-  document.getElementById('heroPills').innerHTML = d.hero.pills.map(p=>`<span class="hero-pill">${p}</span>`).join('');
+  // Hero — built around what I build, not just the name
+  document.getElementById('heroEyebrow').textContent = d.hero.eyebrow;
+  document.getElementById('heroHeadline').textContent = d.hero.headline;
+  document.getElementById('heroSubline').textContent = d.hero.subline;
+  document.getElementById('heroPills').innerHTML = (d.hero.pills||[]).map(p=>`<span class="hero-pill">${esc(p)}</span>`).join('');
   document.getElementById('footerBrand').textContent = d.hero.name;
   document.getElementById('footerCopy').textContent = `© ${d.hero.year} ${d.hero.name}`;
+
+  // Case studies
+  const cs = document.getElementById('caseStudies');
+  cs.innerHTML = '';
+  d.caseStudies.forEach((c, i) => {
+    const num = String(i+1).padStart(2,'0');
+    const card = document.createElement('article');
+    card.className = 'cs-card reveal ' + ['','d1','d2'][i%3];
+    if (c.link) card.dataset.href = c.link;
+
+    const mediaHtml = (c.media && c.media.length)
+      ? c.media.map(m => {
+          const cap = m.caption ? esc(m.caption) : '';
+          if (m.type === 'video') {
+            const player = isEmbed(m.src)
+              ? `<iframe src="${esc(embedUrl(m.src))}" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>`
+              : `<video src="${esc(m.src)}" controls playsinline preload="metadata"></video>`;
+            return `<div class="cs-media-card">${player}<div class="cs-media-cap"><span>${cap}</span><span class="cs-media-type">Video</span></div></div>`;
+          }
+          return `<div class="cs-media-card"><img src="${esc(m.src)}" alt="${cap || esc(c.title)}" loading="lazy"/><div class="cs-media-cap"><span>${cap}</span><span class="cs-media-type">Image</span></div></div>`;
+        }).join('')
+      : `<div class="cs-placeholder"><span>${num}</span><small>${esc(c.tag || 'Case Study')}</small></div>`;
+
+    card.innerHTML = `
+      <div class="cs-top">
+        <div>
+          <div class="cs-meta"><span class="cs-num">${num}</span><span class="cs-tag">${esc(c.tag||'')}</span></div>
+          <h3 class="cs-title">${esc(c.title)}</h3>
+          <p class="cs-summary">${esc(c.summary||'')}</p>
+          ${c.outcome ? `<p class="cs-outcome">${esc(c.outcome)}</p>` : ''}
+          <div class="cs-footer">
+            <div class="cs-chips">${(c.stack||[]).map(s=>`<span class="cs-chip">${esc(s)}</span>`).join('')}</div>
+            ${c.link ? `<a class="cs-link" href="${esc(c.link)}" target="_blank" rel="noopener">View Project ↗</a>` : ''}
+          </div>
+        </div>
+        <span class="cs-year">${esc(c.year||'')}</span>
+      </div>
+      <div class="cs-media">${mediaHtml}</div>`;
+
+    if (c.link) {
+      card.addEventListener('click', e => {
+        if (e.target.closest('a,video,iframe')) return;
+        window.open(c.link, '_blank', 'noopener');
+      });
+    }
+    cs.appendChild(card);
+  });
+
+  // Archive
+  const al = document.getElementById('archiveList');
+  al.innerHTML = '';
+  document.getElementById('archiveLabel').style.display = d.archive.length ? '' : 'none';
+  d.archive.forEach(p => {
+    const tag = p.link ? 'a' : 'div';
+    const row = document.createElement(tag);
+    row.className = 'archive-row reveal';
+    if (p.link) { row.href = p.link; row.target = '_blank'; row.rel = 'noopener'; }
+    row.innerHTML = `
+      <span class="archive-title">${esc(p.title)}</span>
+      <span class="archive-year">${esc(p.year||'')}</span>
+      <span class="archive-arrow">${p.link ? '↗' : ''}</span>
+      ${p.description ? `<span class="archive-desc">${esc(p.description)}</span>` : ''}`;
+    al.appendChild(row);
+  });
+
+  // Capabilities — groups instead of logos
+  document.getElementById('capGrid').innerHTML = d.capabilities.map((g, i) => `
+    <div class="cap-group">
+      <div class="cap-index">${String(i+1).padStart(2,'0')}</div>
+      <h3 class="cap-name">${esc(g.group)}</h3>
+      <ul class="cap-items">${(g.items||[]).map(it=>`<li>${esc(it)}</li>`).join('')}</ul>
+    </div>`).join('');
 
   // About
   const interestsDisplay = Array.isArray(d.about.interests)
     ? d.about.interests.join(' · ')
     : (d.about.interests || '');
   document.getElementById('aboutMeta').innerHTML = `
-    <div class="about-meta-item"><label>Status</label><span>${d.about.status}</span></div>
-    <div class="about-meta-item"><label>Education</label><span>${d.about.education}</span></div>
-    <div class="about-meta-item"><label>Award</label><span>${d.about.award}</span></div>
-    <div class="about-meta-item"><label>Interests</label><span>${interestsDisplay}</span></div>`;
+    <div class="about-meta-item"><label>Status</label><span>${esc(d.about.status)}</span></div>
+    <div class="about-meta-item"><label>Education</label><span>${esc(d.about.education)}</span></div>
+    <div class="about-meta-item"><label>Award</label><span>${esc(d.about.award)}</span></div>
+    <div class="about-meta-item"><label>Interests</label><span>${esc(interestsDisplay)}</span></div>`;
   document.getElementById('aboutBio').textContent = d.about.bio;
 
-  // Projects
-  const pl = document.getElementById('projectsList');
-  pl.innerHTML = '';
-  d.projects.forEach((p, i) => {
-    const delays = ['','d1','d2','d3'];
-    const row = document.createElement('div');
-    row.className = 'list-row reveal ' + delays[i % 4];
-    row.innerHTML = `
-      <div class="list-row-header">
-        <span class="row-title">${p.title}</span>
-        <span class="row-meta">${p.year}</span>
-        <span class="row-toggle">+</span>
-      </div>
-      <div class="list-expand">
-        <div class="list-expand-inner">
-          <p class="expand-desc">${p.description}</p>
-          ${p.link ? `<a class="expand-link" href="${p.link}" target="_blank" rel="noopener">View Project ↗</a>` : ''}
-        </div>
-      </div>`;
-    row.querySelector('.list-row-header').addEventListener('click', () => toggleRow(row));
-    pl.appendChild(row);
-  });
-
-  // Tech Stack
-  const mi = document.getElementById('marqueeInner');
-  const imgs = [...d.techStack, ...d.techStack]; // duplicate for loop
-  mi.innerHTML = imgs.map(t => `<img src="${t.image}" alt="${t.name}" />`).join('');
-
-  // Clubs
-  const cs = document.getElementById('clubsStack');
-  cs.innerHTML = '';
+  // Clubs / CCAs
+  const csk = document.getElementById('clubsStack');
+  csk.innerHTML = '';
   d.clubs.forEach((c, ci) => {
     const block = document.createElement('div');
     block.className = 'club-block';
-    const rolesHtml = c.roles.map((r,ri) =>
-      `<div class="club-role${ri===0?' first-role':''}"><span class="club-role-title">${r.title}</span><span class="club-role-period">${r.period}</span></div>`
+    const rolesHtml = c.roles.map(r =>
+      `<div class="club-role"><span class="club-role-title">${esc(r.title)}</span><span class="club-role-period">${esc(r.period)}</span></div>`
     ).join('');
     const dotsHtml = c.images.map((_, idx) =>
       `<button class="carousel-dot${idx===0?' active':''}" data-club="${ci}" data-index="${idx}"></button>`
     ).join('');
-    const slidesHtml = c.images.map(img =>
-      `<img src="${img}" alt="${c.name}" loading="lazy" />`
+    const slidesHtml = c.images.map(src =>
+      isVideoSrc(src)
+        ? `<video src="${esc(src)}" muted loop autoplay playsinline></video>`
+        : `<img src="${esc(src)}" alt="${esc(c.name)}" loading="lazy"/>`
     ).join('');
     block.innerHTML = `
       <div class="reveal">
@@ -311,43 +476,56 @@ function render(d) {
         <div class="carousel-dots">${dotsHtml}</div>
       </div>
       <div class="reveal d1">
-        <h3 class="club-name">${c.name}</h3>
+        <h3 class="club-name">${esc(c.name)}</h3>
         <div class="club-roles">${rolesHtml}</div>
-        <p class="club-desc">${c.description}</p>
+        <p class="club-desc">${esc(c.description)}</p>
       </div>`;
-    cs.appendChild(block);
+    csk.appendChild(block);
   });
 
   // Achievements
-  const al = document.getElementById('achievementsList');
-  al.innerHTML = '';
+  const achl = document.getElementById('achievementsList');
+  achl.innerHTML = '';
   d.achievements.forEach((a, i) => {
     const delays = ['','d1','d2','d3'];
     const row = document.createElement('div');
     row.className = 'list-row reveal ' + delays[i % 4];
     row.innerHTML = `
       <div class="list-row-header">
-        <span class="row-title">${a.title}</span>
-        <span class="row-meta">${a.date}</span>
+        <span class="row-title">${esc(a.title)}</span>
+        <span class="row-meta">${esc(a.date)}</span>
         <span class="row-toggle">+</span>
       </div>
       <div class="list-expand">
         <div class="list-expand-inner">
-          <p class="expand-desc">${a.description}</p>
-          ${a.link ? `<a class="expand-link" href="${a.link}" target="_blank" rel="noopener">View ↗</a>` : ''}
+          <p class="expand-desc">${esc(a.description)}</p>
+          ${a.link ? `<a class="expand-link" href="${esc(a.link)}" target="_blank" rel="noopener">View ↗</a>` : ''}
         </div>
       </div>`;
     row.querySelector('.list-row-header').addEventListener('click', () => toggleRow(row));
-    al.appendChild(row);
+    achl.appendChild(row);
   });
+
+  // Contact
+  document.getElementById('contactHeading').textContent = d.contact.heading || "Let's talk.";
+  document.getElementById('contactBlurb').textContent = d.contact.blurb || '';
+  const rows = [];
+  if (d.contact.email) rows.push({label:'Email', value:d.contact.email, href:'mailto:'+d.contact.email});
+  if (d.contact.linkedin) rows.push({label:'LinkedIn', value:d.contact.linkedin.replace(/^https?:\/\/(www\.)?/,''), href:d.contact.linkedin});
+  if (d.contact.github) rows.push({label:'GitHub', value:d.contact.github.replace(/^https?:\/\/(www\.)?/,''), href:d.contact.github});
+  document.getElementById('contactRows').innerHTML = rows.map(r => `
+    <a class="contact-row" href="${esc(r.href)}" ${r.href.startsWith('mailto:')?'':'target="_blank" rel="noopener"'}>
+      <span class="contact-row-label">${r.label}</span>
+      <span class="contact-row-value">${esc(r.value)}</span>
+      <span class="contact-row-arrow">↗</span>
+    </a>`).join('');
 }
 
-/* ── EXPAND ROWS ── */
+/* ── ACHIEVEMENT ROWS ── */
 function toggleRow(row) {
   const panel = row.querySelector('.list-expand');
   const inner = row.querySelector('.list-expand-inner');
   const isOpen = row.classList.contains('open');
-  // close all others in same list
   row.closest('.list-table').querySelectorAll('.list-row.open').forEach(r => {
     if (r !== row) {
       r.classList.remove('open');
@@ -363,22 +541,33 @@ function toggleRow(row) {
   }
 }
 
-/* ── CURSOR ── */
+/* ── CURSOR ──
+   States: is-view   → expanded circle + "VIEW" over clickable case studies
+           is-invert → inverted disc over imagery (img / video / carousels)
+           is-text   → disappears over text (native caret shows instead)
+           is-link   → gentle expansion over links & buttons               */
 const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+let mx=0,my=0,rx=0,ry=0,seen=false;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  if (!seen) { seen=true; rx=mx; ry=my; cur.style.visibility='visible'; ring.style.visibility='visible'; }
+});
 (function tick(){
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-  rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;
   requestAnimationFrame(tick);
 })();
+function cursorStateFor(el) {
+  if (!el || !el.closest) return '';
+  if (el.closest('img,video,iframe,.carousel,.cs-media-card,.cs-placeholder')) return 'is-invert';
+  if (el.closest('.cs-card[data-href]')) return 'is-view';
+  if (el.closest('a,button,.list-row,input,textarea,select')) return 'is-link';
+  if (el.closest('p,h1,h2,h3,h4,h5,h6,li,blockquote')) return 'is-text';
+  return '';
+}
 document.addEventListener('mouseover', e => {
-  if (e.target.closest('a,button,.list-row')) {
-    cur.style.transform='translate(-50%,-50%) scale(3)'; ring.style.opacity='.3';
-  } else {
-    cur.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='1';
-  }
+  cur.className = 'cursor ' + cursorStateFor(e.target);
 });
 
 /* ── SCROLL REVEAL ── */
@@ -405,8 +594,8 @@ function bindCarousels() {
   setInterval(() => {
     document.querySelectorAll('.carousel').forEach(c => {
       const club = c.dataset.club;
-      const total = c.querySelectorAll('img').length;
-      goTo(club, ((carouselState[club]||0)+1) % total);
+      const total = c.querySelectorAll('img,video').length;
+      if (total > 1) goTo(club, ((carouselState[club]||0)+1) % total);
     });
   }, 4000);
 }
@@ -418,7 +607,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     render(data);
     observeAll();
     bindCarousels();
-    // Hero immediate reveal
     document.querySelectorAll('#home .reveal').forEach((el,i) => {
       setTimeout(() => el.classList.add('visible'), i*130+80);
     });
