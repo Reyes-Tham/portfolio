@@ -137,6 +137,8 @@ input[type=file]{display:none}
     <div class="nav-item" onclick="showPage('achievements')" data-page="achievements">Achievements</div>
     <div class="nav-item" onclick="showPage('contact')" data-page="contact">Contact</div>
     <div class="sidebar-bottom">
+      <button class="save-btn" style="background:#fff;color:var(--text);border:1px solid var(--border);margin-bottom:.6rem" onclick="document.getElementById('importFile').click()">Import data.json</button>
+      <input type="file" id="importFile" accept=".json,application/json" onchange="importData(this)"/>
       <button class="save-btn" id="saveBtn" onclick="saveAndExport()">Save &amp; Export JSON</button>
     </div>
   </aside>
@@ -329,14 +331,38 @@ function migrate(d) {
 
 /* ─── INIT ─── */
 async function initAdmin() {
+  let usedFallback = false;
   try {
     const res = await fetch('data.json?v='+Date.now());
     if (res.ok) { D = await res.json(); } else { throw new Error(); }
   } catch(e) {
+    // Offline / file:// — the built-in snapshot may be stale
     D = JSON.parse(JSON.stringify(INLINE_DATA));
+    usedFallback = true;
   }
   D = migrate(D);
   populateAll();
+  if (usedFallback) toast('Offline mode: loaded a built-in snapshot which may be outdated. Use "Import data.json" to edit your latest file.');
+}
+
+/* ─── IMPORT ───
+   Load any data.json (e.g. the one you just exported, or the repo copy)
+   so you are always editing the current data, even offline. */
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      D = migrate(JSON.parse(e.target.result));
+      populateAll();
+      toast(`Imported ${file.name} — you are now editing that data`, true);
+    } catch(err) {
+      toast('Could not read that file — is it a valid data.json?');
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
 }
 
 function populateAll() {

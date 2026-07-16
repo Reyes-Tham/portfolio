@@ -33,7 +33,7 @@ There's no server and no database. `index.html` fetches `data.json` at load time
 
 ## How I update the site
 
-1. Open `admin.html` in a browser and enter my password.
+1. Open `admin.html` in a browser and enter my password. On the live site it always fetches the latest `data.json` automatically; if I'm working offline (or want to continue from a file I just exported), I hit **Import data.json** and pick the file so I'm editing current data, never a stale snapshot.
 2. Edit whatever I need. New entries are **first in, last out** — anything I add goes straight to the top, so the most recent stuff always leads.
 3. For case studies I can upload multiple images/videos at once or paste a video URL; for CCAs there's no upload limit — I just multi-select files.
 4. Hit **Save & Export JSON** — it downloads a fresh `data.json`.
