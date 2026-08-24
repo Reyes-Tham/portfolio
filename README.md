@@ -25,7 +25,7 @@ There's no server and no database. `index.html` fetches `data.json` at load time
 
 ## Site features
 
-- **Featured work cards** — my selected projects, each with a summary, an outcome line, a tech stack, and a media strip that can hold **image cards and video cards** for mockups (YouTube/Vimeo embeds, `.mp4` links or repo-relative paths like `assets/hackathon-demo.mp4`, or uploaded files).
+- **Featured work cards** — my selected projects, each with a summary, an outcome line, a tech stack, and a media strip that can hold **image cards and video cards** for mockups (YouTube/Vimeo embeds, `.mp4` links or repo-relative paths like `assets/Hackathon_Demo.mp4`, or uploaded files).
 - **Project archive** — the rest of my projects in a compact list under the featured work.
 - **Capability groups** — grouped skills (AI/ML, automation, full-stack, data) instead of a marquee of logos.
 - **Custom cursor** — it expands and shows **"VIEW"** over clickable case studies, inverts over imagery, gently grows over links, and disappears over text so the native caret takes over. On touch devices it gets out of the way entirely.
@@ -49,5 +49,6 @@ git push
 ## Notes to self
 
 - The admin stores only a SHA-256 **hash** of my password (in `admin.html`), never the password itself, so it can't be read from the source. To change it: open the admin page, run `await newPassHash('myNewPassword')` in the DevTools console, and paste the printed hash over `PASS_HASH`. It's still a soft lock — this is a client-side static site — but nothing sensitive lives behind it anyway.
-- Uploaded files are stored as data URIs inside `data.json`, so I keep videos short and images compressed to stop the file from ballooning. Anything genuinely large goes in `assets/` instead and gets referenced by path — see `assets/README.md`.
+- Uploaded files are stored as data URIs inside `data.json`, so I keep videos short and images compressed to stop the file from ballooning. Anything genuinely large goes in `assets/` instead and gets referenced by path, or gets hosted off-repo and referenced by URL — see `assets/README.md` for the options and the ffmpeg recipe.
+- Case-study videos loop and autoplay muted by default, pause while off screen, and drop the autoplay for visitors who prefer reduced motion. `"loop": false` on a media item gives a plain player instead.
 - The inline fallback data in `index.html` and `admin.html` should be refreshed occasionally so offline viewing stays in sync with `data.json`.
