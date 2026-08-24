@@ -49,5 +49,6 @@ git push
 ## Notes to self
 
 - The admin stores only a SHA-256 **hash** of my password (in `admin.html`), never the password itself, so it can't be read from the source. To change it: open the admin page, run `await newPassHash('myNewPassword')` in the DevTools console, and paste the printed hash over `PASS_HASH`. It's still a soft lock — this is a client-side static site — but nothing sensitive lives behind it anyway.
-- Uploaded files are stored as data URIs inside `data.json`, so I keep videos short and images compressed to stop the file from ballooning. Anything genuinely large goes in `assets/` instead and gets referenced by path — see `assets/README.md`.
+- Uploaded files are stored as data URIs inside `data.json`, so I keep videos short and images compressed to stop the file from ballooning. Anything genuinely large goes in `assets/` instead and gets referenced by path, or gets hosted off-repo and referenced by URL — see `assets/README.md` for the options and the ffmpeg recipe.
+- Case-study videos loop and autoplay muted by default, pause while off screen, and drop the autoplay for visitors who prefer reduced motion. `"loop": false` on a media item gives a plain player instead.
 - The inline fallback data in `index.html` and `admin.html` should be refreshed occasionally so offline viewing stays in sync with `data.json`.

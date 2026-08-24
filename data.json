@@ -29,7 +29,8 @@
         {
           "type": "video",
           "src": "assets/hackathon-demo.mp4",
-          "caption": "Beat by Beat — Spatial Hack AI 2026 demo"
+          "caption": "Beat by Beat — Spatial Hack AI 2026 demo",
+          "loop": true
         }
       ],
       "stack": [
