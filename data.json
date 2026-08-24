@@ -11,8 +11,8 @@
     ]
   },
   "about": {
-    "status": "NSF @ HQ RSAF",
-    "education": "NUS Computer Science, 2026",
+    "status": "Undergraduate",
+    "education": "NUS Computer Science, Year 1",
     "award": "ST Engineering Prize",
     "interests": [
       "Software Engineering",
@@ -24,6 +24,30 @@
     "bio": "I started coding at 12 by building mini-games on platforms such as Game Creator and Roblox. What began as curiosity evolved into a deeper interest in software engineering, system design, and creative digital experiences. Beyond technology, I am passionate about the financial sector — including stock trading and investment — and I enjoy exploring how technology can optimize financial decision-making. I also love traveling and going to the gym, and I aspire to become a software engineer who designs impactful and innovative digital solutions."
   },
   "caseStudies": [
+    {
+      "media": [
+        {
+          "type": "video",
+          "src": "assets/hackathon-demo.mp4",
+          "caption": "Beat by Beat — Spatial Hack AI 2026 demo"
+        }
+      ],
+      "stack": [
+        "Swift",
+        "SwiftUI",
+        "RealityKit",
+        "ARKit",
+        "visionOS",
+        "AVFoundation"
+      ],
+      "tag": "Spatial Computing · visionOS · Health",
+      "summary": "A spatial rhythm game for Apple Vision Pro built for upper-limb rehabilitation after a stroke, which I led team OWADIO in developing across the four days of Spatial Hack AI 2026. Each arm is measured on its own through six guided reaches, so targets always spawn inside the patient's own reach — one chart asks a patient with 20 cm of reach and a patient with 60 cm for the same movement, scaled to what each of them has. Targets land on detected beats, ARKit hand tracking judges every reach, and each session is recorded automatically into directional breakdowns and a spatial heatmap a therapist can review.",
+      "outcome": "Won the Most Fun Award at Spatial Hack AI 2026, held at the Apple Developer Center, Singapore.",
+      "link": "https://github.com/Reyes-Tham/Beat-by-Beat",
+      "id": "cs4",
+      "title": "Beat by Beat",
+      "year": "2026"
+    },
     {
       "media": [],
       "stack": [
@@ -219,6 +243,13 @@
     }
   ],
   "achievements": [
+    {
+      "id": "a9",
+      "title": "Most Fun Award — Spatial Hack AI 2026",
+      "date": "Aug 2026",
+      "description": "Awarded the Most Fun Award at Spatial Hack AI 2026, held 7–10 August 2026 at the Apple Developer Center, Singapore. I led team OWADIO in developing Beat by Beat, a spatial rhythm game for Apple Vision Pro that turns upper-limb stroke rehabilitation into a song played inside each patient's own measured reach.",
+      "link": "https://github.com/Reyes-Tham/Beat-by-Beat"
+    },
     {
       "id": "a1",
       "title": "Best Airman of the Month",
