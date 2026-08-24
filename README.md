@@ -25,7 +25,7 @@ There's no server and no database. `index.html` fetches `data.json` at load time
 
 ## Site features
 
-- **Featured work cards** — my selected projects, each with a summary, an outcome line, a tech stack, and a media strip that can hold **image cards and video cards** for mockups (YouTube/Vimeo embeds, `.mp4` links or repo-relative paths like `assets/hackathon-demo.mp4`, or uploaded files).
+- **Featured work cards** — my selected projects, each with a summary, an outcome line, a tech stack, and a media strip that can hold **image cards and video cards** for mockups (YouTube/Vimeo embeds, `.mp4` links or repo-relative paths like `assets/Hackathon_Demo.mp4`, or uploaded files).
 - **Project archive** — the rest of my projects in a compact list under the featured work.
 - **Capability groups** — grouped skills (AI/ML, automation, full-stack, data) instead of a marquee of logos.
 - **Custom cursor** — it expands and shows **"VIEW"** over clickable case studies, inverts over imagery, gently grows over links, and disappears over text so the native caret takes over. On touch devices it gets out of the way entirely.

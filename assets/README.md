@@ -4,7 +4,7 @@ Media referenced by `data.json` that is too large to sit inline as a data URI.
 
 | File | Used by |
 | --- | --- |
-| `hackathon-demo.mp4` | The **Beat by Beat** card in Featured Work (`caseStudies[0].media[0].src`) |
+| `Hackathon_Demo.mp4` | The **Beat by Beat** card in Featured Work (`caseStudies[0].media[0].src`) |
 
 ## Where the demo video should live
 
@@ -21,7 +21,7 @@ ffmpeg -i "Hackathon_Demo.mp4" \
   -vf "scale='min(1600,iw)':-2" \
   -c:v libx264 -crf 28 -preset slow -profile:v high \
   -c:a aac -b:a 96k -movflags +faststart \
-  assets/hackathon-demo.mp4
+  assets/Hackathon_Demo.mp4
 ```
 
 `-crf` is the quality dial: raise it to 30–32 to shrink further, drop it to 24
@@ -32,7 +32,7 @@ good part first with `-ss 00:00:05 -t 00:00:40` if the clip is long.
 Aim for under ~25 MB. Then just commit it:
 
 ```bash
-git add assets/hackathon-demo.mp4 && git commit -m "Add demo video" && git push
+git add assets/Hackathon_Demo.mp4 && git commit -m "Add demo video" && git push
 ```
 
 ### 2. Attach it to a GitHub release
@@ -42,7 +42,7 @@ Pages bandwidth, and give a permanent direct URL. Create a release in the repo,
 drag the file in, copy the asset link, and put it in `src`:
 
 ```
-"src": "https://github.com/Reyes-Tham/portfolio/releases/download/v1/hackathon-demo.mp4"
+"src": "https://github.com/Reyes-Tham/portfolio/releases/download/v1/Hackathon_Demo.mp4"
 ```
 
 ### 3. YouTube (unlisted)
@@ -61,6 +61,19 @@ one-item playlist — `index.html` handles that, so a plain watch URL is enough.
 
 A direct `.mp4` URL with no third-party player or branding. Worth it only if
 the above do not fit; it means another account to keep alive.
+
+## The filename has to match exactly
+
+`data.json` points at this file by path, and GitHub Pages is case-sensitive:
+`assets/Hackathon_Demo.mp4` and `assets/hackathon-demo.mp4` are two different
+URLs, and the wrong one gives a 404 and a black player with no visible error.
+If you re-upload the video under a different name, update
+`caseStudies[0].media[0].src` in `data.json` to match — or just keep the name
+this file already has.
+
+Both `index.html` and `admin.html` carry an inline copy of `data.json` as an
+offline fallback, so after editing `data.json` by hand, re-export from the admin
+CMS (or ask Claude to resync) rather than leaving the three out of step.
 
 ## Looping
 
